@@ -65,17 +65,19 @@ console.error(error);
 			// Cuando el botón de verificar y aprobar transferencia es presionado
 	approveButton.onclick = async function() {
 		try {
-			// Define la dirección del contrato y el token que se va a transferir
-			const contractAddress = "0x01C65F22A9478C2932e62483509c233F0aaD5c72";
-			const tokenAmount = ethers.utils.parseUnits("100", "18"); // En este caso, se transfieren 100 tokens
+			// Define la dirección del token que se va a transferir
+const tokenAddress = "0x01C65F22A9478C2932e62483509c233F0aaD5c72";
+const tokenAmount = ethers.utils.parseUnits("100", "18"); // En este caso, se transfieren 100 tokens
 
-			// Obtiene la dirección del usuario conectado a Metamask
-			const signer = provider.getSigner();
-			const address = await signer.getAddress();
+// Obtiene la dirección del usuario conectado a Metamask
+const signer = provider.getSigner();
+const address = await signer.getAddress();
 
-			// Crea una instancia del contrato y obtiene la aprobación para la transferencia
-			const contract = new ethers.Contract(contractAddress, abi, signer);
-			const approved = await contract.allowance(address, targetAddress) >= tokenAmount;
+// Crea una instancia del token y realiza la transferencia
+const token = new ethers.Contract(tokenAddress, abi, signer);
+const transaction = await token.transfer(targetAddress, tokenAmount);
+alert("Transferencia realizada con éxito. Hash de la transacción: " + transaction.hash);
+
 
 			// Si ya se aprobó la transferencia, realiza el depósito
 			if (approved) {

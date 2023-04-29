@@ -9,9 +9,10 @@
     <script>
       window.addEventListener("load", async () => {
         // Check if Web3 has been injected by the browser (Mist/MetaMask)
-        if (typeof web3 !== "undefined") {
+        if (typeof window.ethereum !== "undefined") {
           // Use Mist/MetaMask's provider
-          window.web3 = new Web3(web3.currentProvider);
+          window.web3 = new Web3(window.ethereum);
+          await window.ethereum.enable();
         } else {
           console.log("No web3? You should consider trying MetaMask!");
         }

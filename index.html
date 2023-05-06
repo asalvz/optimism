@@ -1,61 +1,35 @@
-<!DOCTYPE html>
 <html>
 <head>
-	<title>Compra de tokens en Smart Chain</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
+  <script>
+    async function buyTokens() {
+      // Conectar a la red Ethereum
+      const web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+      
+      // Obtener la dirección del contrato
+      const contractAddress = "0xDAC3C88F34a613c36b305fE40242a0827c6e4276"; // Reemplaza esto con la dirección de tu contrato
+      
+      // Crear una instancia del contrato
+      const contract = new web3.eth.Contract(abi, contractAddress);
+      
+      // Obtener la cantidad de tokens a comprar
+      const tokenAmount = document.getElementById("token-amount").value;
+      
+      // Calcular la cantidad de BNB a enviar
+      const bnbAmount = tokenAmount / tokenPrice;
+      
+      // Enviar la transacción de compra
+      const accounts = await web3.eth.getAccounts();
+      await contract.methods.buyTokens().send({
+        from: accounts[0],
+        value: web3.utils.toWei(bnbAmount.toString(), "ether")
+      });
+    }
+  </script>
 </head>
 <body>
-	<div class="container">
-		<div class="card" style="width: 18rem;">
-			<img class="card-img-top" src="https://via.placeholder.com/150" alt="Card image cap">
-			<div class="card-body">
-				<h5 class="card-title">Compra de tokens en Smart Chain</h5>
-				<p class="card-text">Compra tokens de nuestro contrato en Smart Chain</p>
-				<a href="#" class="btn btn-primary" onclick="comprarTokens()">Comprar tokens</a>
-			</div>
-		</div>
-	</div>
-	<script>
-		const Web3 = require('web3');
-
-// Conectar a la red de Binance Smart Chain
-const web3 = new Web3('https://bsc-dataseed1.binance.org:443');
-
-// Dirección del contrato AICoin
-const contractAddress = '0xDAC3C88F34a613c36b305fE40242a0827c6e4276';
-
-// ABI del contrato AICoin
-const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"buyTokens","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"price","type":"uint256"}],"name":"setTokenPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"fee","type":"uint256"}],"name":"setTransactionFee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"transactionFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-
-// Obtener una instancia del contrato AICoin
-const AICoin = new web3.eth.Contract(abi, contractAddress);
-
-// Función para comprar tokens
-async function buyTokens(amountInBNB) {
-  // Calcular la cantidad de tokens a emitir
-  const tokenPrice = await AICoin.methods.tokenPrice().call();
-  const tokenAmount = web3.utils.toBN(amountInBNB).mul(web3.utils.toBN('1000000000000000000')).div(web3.utils.toBN(tokenPrice));
-
-  // Enviar la transacción al contrato para comprar los tokens
-  const accounts = await web3.eth.getAccounts();
-  const result = await AICoin.methods.buyTokens().send({
-    from: accounts[0],
-    value: web3.utils.toBN(amountInBNB),
-    gasPrice: web3.utils.toWei('5', 'gwei'),
-    gasLimit: web3.utils.toBN('100000'),
-  });
-
-  console.log(result);
-}
-
-// Ejemplo de compra de 1 BNB en tokens
-buyTokens('1');
-
-	</script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <input type="number" id="token-amount" placeholder="Cantidad de tokens">
+  <button onclick="buyTokens()">Comprar tokens</button>
 </body>
 </html>

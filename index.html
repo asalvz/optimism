@@ -1,5 +1,50 @@
-<html>
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Comprar Tokens</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <style>
+      body {
+  background-color: #111;
+}
+
+.card {
+  background-color: #222;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+button {
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #3367D6;
+}
+    </style>
+    <div class="card">
+      <h2>Comprar Tokens</h2>
+      <button onclick="buyTokens()">Comprar Tokens</button>
+    </div>
+  </body>
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
   <script>
     // Define el ABI del contrato

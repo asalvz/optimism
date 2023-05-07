@@ -367,201 +367,42 @@ input {
 <script>
 
  
-	// Constantes
-const NETWORK_ID = 56; // Binance Smart Chain
-const CONTRACT_ADDRESS = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434'; // Dirección del contrato a depositar
-
-// Elementos HTML
-const connectButton = document.getElementById('connect-button');
+	const connectButton = document.getElementById('connect-button');
+const depositButton = document.getElementById('deposit-button');
+const depositAmount = document.getElementById('deposit-amount');
 const accountInfo = document.getElementById('account-info');
 const depositSection = document.getElementById('deposit-section');
-const depositAmount = document.getElementById('deposit-amount');
-const depositButton = document.getElementById('deposit-button');
-const popup = document.querySelector('.popup');
-const overlay = document.querySelector('.overlay');
 
-// Instancia de web3
-let web3;
-
-// Comprueba si el usuario está conectado a Metamask
-async function checkConnection() {
-  if (window.ethereum) {
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      web3 = new Web3(window.ethereum);
-      const accounts = await web3.eth.getAccounts();
-      if (accounts.length > 0) {
-        connectButton.style.display = 'none';
-        accountInfo.style.display = 'block';
-        accountInfo.innerText = accounts[0];
-        depositButton.disabled = false;
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.error('Metamask no detectado');
+connectButton.addEventListener('click', async () => {
+  try {
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    accountInfo.textContent = `Conectado a Metamask con la cuenta ${account}`;
+    depositSection.style.display = 'block';
+  } catch (error) {
+    console.error(error);
+    accountInfo.textContent = 'No se pudo conectar a Metamask';
   }
-}
-
-// Función para conectar la cuenta de Metamask
-async function connectMetaMask() {
-  if (typeof window.ethereum !== 'undefined') {
-    try {
-      // Solicitar acceso a la cuenta
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      // Obtener la dirección de la cuenta conectada
-      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-      const address = accounts[0];
-      // Cambiar el botón a "Depositar"
-      depositButton.innerHTML = 'Depositar';
-      // Mostrar la dirección de la cuenta conectada
-      accountInfo.innerText = address;
-      accountInfo.style.display = 'block';
-      connectButton.style.display = 'none';
-      depositButton.disabled = false;
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.error('Metamask no está instalado');
-  }
-}
-
-// Función para abrir la ventana emergente de depósito
-function openDepositPopup() {
-  // Crear el formulario de depósito
-  const form = document.createElement('form');
-  form.id = 'depositForm';
-  form.innerHTML = `
-    <label for="amount">Cantidad:</label>
-    <input type="number" id="amount" name="amount" min="0.001" step="0.001" required>
-    <br>
-    <button type="submit">Enviar</button>
-  `;
-  // Establecer los estilos del formulario
-  form.style.backgroundColor = '#222';
-  form.style.padding = '20px';
-  form.style.borderRadius = '10px';
-  form.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
-  form.style.color = '#fff';
-  form.style.display = 'flex';
-  form.style.flexDirection = 'column';
-  form.style.alignItems = 'center';
-  form.style.gap = '10px';
-
-  // Agregar el formulario a la página
-  document.body.appendChild(form);
-
-  // Agregar el evento de envío del formulario
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    // Obtener la cantidad a depositar
-    const amountInput = document.getElementById("amount");
-
-// Establecer los estilos del overlay
-overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-overlay.style.position = 'fixed';
-overlay.style.top = '0';
-overlay.style.left = '0';
-overlay.style.width = '100%';
-overlay.style.height = '100%';
-overlay.style.display = 'flex';
-overlay.style.justifyContent = 'center';
-overlay.style.alignItems = 'center';
-
-// Agregar la ventana emergente y el overlay a la página
-document.body.appendChild(popup);
-document.body.appendChild(overlay);
-}
-
-// Función para cerrar la ventana emergente
-function closePopup() {
-// Remover la ventana emergente y el overlay de la página
-document.body.removeChild(popup);
-document.body.removeChild(overlay);
-}
-
-// Función para enviar BNB
-async function sendBNB() {
-// Obtener la cantidad a enviar
-const amountInput = document.getElementById("amount-input");
-const amount = amountInput.value;
-
-// Validar que se haya ingresado una cantidad
-if (!amount) {
-alert("Ingrese una cantidad para enviar");
-return;
-}
-
-// Convertir la cantidad a Wei
-const amountWei = web3.utils.toWei(amount, "ether");
-
-// Obtener la dirección del usuario
-const accounts = await web3.eth.getAccounts();
-const from = accounts[0];
-
-// Crear el objeto de transacción
-const txObject = {
-from: from,
-to: CONTRACT_ADDRESS,
-value: amountWei,
-};
-
-// Enviar la transacción
-try {
-const txHash = await web3.eth.sendTransaction(txObject);
-alert(Transacción enviada: ${txHash});
-closePopup();
-} catch (error) {
-console.error(error);
-alert("Error al enviar la transacción");
-}
-}
-
-// Función principal
-async function main() {
-// Comprobar si el usuario está conectado a MetaMask
-await checkConnection();
-
-// Agregar el evento de clic al botón de depósito
-depositButton.addEventListener('click', () => {
-openDepositPopup();
 });
 
-// Verificar si la red actual es Binance Smart Chain
-const chainId = await web3.eth.getChainId();
-if (chainId !== NETWORK_ID) {
-alert('Por favor, conecte MetaMask a Binance Smart Chain');
-return;
-}
-
-// Mostrar la información de la cuenta conectada
-const accounts = await web3.eth.getAccounts();
-const address = accounts[0];
-accountInfo.innerHTML = Conectado con: ${address};
-
-// Mostrar la sección de depósito
-depositSection.style.display = 'block';
-}
-
-// Conectar MetaMask al cargar la página
-window.addEventListener('load', async () => {
-// Comprobar si MetaMask está instalado
-if (typeof window.ethereum !== 'undefined') {
-// Crear una instancia de web3
-web3 = new Web3(window.ethereum);
-try {
-// Solicitar acceso a la cuenta
-await window.ethereum.request({ method: 'eth_requestAccounts' });
-main();
-} catch (error) {
-console.error(error);
-}
-} else {
-console.error('MetaMask no está instalado');
-}
-});</script>
+depositButton.addEventListener('click', async () => {
+  try {
+    const amount = depositAmount.value;
+    const receiverAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434'; // Replace with actual receiver address
+    const web3 = new Web3(window.ethereum);
+    const transactionParameters = {
+      to: receiverAddress,
+      value: web3.utils.toWei(amount, 'ether'),
+      from: ethereum.selectedAddress
+    };
+    await ethereum.request({ method: 'eth_sendTransaction', params: [transactionParameters] });
+    accountInfo.textContent = `Se depositaron ${amount} BNB a ${receiverAddress}`;
+  } catch (error) {
+    console.error(error);
+    accountInfo.textContent = 'No se pudo realizar el depósito';
+  }
+});
+</script>
 </head>
 </body>
 </html>

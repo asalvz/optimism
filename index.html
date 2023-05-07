@@ -182,15 +182,17 @@ input {
   <h1 class="aicoin-title">AICoin</h1>
   <p class="aicoin-desc">AICoin is an artificial intelligence project aimed at solving various AI-related projects.</p>
 </div>
-	  <div class="card">
-  <h2>Conecta a Metamask</h2>
-  <button id="connect-button">Conectar</button>
-  <div id="account-info"></div>
-  <div id="deposit-section" style="display:none;">
-    <input id="deposit-amount" type="number" step="0.001" min="0.001" placeholder="Cantidad (BNB)">
-    <button id="deposit-button">Depositar</button>
-  </div>
-</div>
+	  <h1>My Web App</h1>
+    <button id="connect-button">Connect to Metamask</button>
+    <div id="deposit-section" style="display: none;">
+        <label for="deposit-amount">Deposit amount:</label>
+        <input type="number" step="0.001" id="deposit-amount" placeholder="Enter deposit amount">
+        <button id="deposit-button">Deposit</button>
+    </div>
+    <p id="account-info"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="app.js"></script>
 
 
    

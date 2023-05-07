@@ -37,7 +37,58 @@ button {
 button:hover {
   background-color: #3367D6;
 }
+	    .aicoin-section {
+  text-align: center;
+  background-color: #fff;
+  padding: 50px;
+}
+
+.aicoin-title {
+  font-family: 'Pixel', Arial, sans-serif;
+  font-size: 60px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  animation: pixel-flicker 0.8s infinite alternate;
+}
+
+.aicoin-desc {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #666;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+@keyframes pixel-flicker {
+  0% {
+    transform: translateY(0px);
+    text-shadow: 1px 1px #ff00c2, -1px -1px #00b8ff;
+  }
+  25% {
+    transform: translateY(-3px);
+    text-shadow: -1px -1px #ff00c2, 1px 1px #00b8ff;
+  }
+  50% {
+    transform: translateY(0px);
+    text-shadow: 1px 1px #ff00c2, -1px -1px #00b8ff;
+  }
+  75% {
+    transform: translateY(3px);
+    text-shadow: -1px -1px #ff00c2, 1px 1px #00b8ff;
+  }
+  100% {
+    transform: translateY(0px);
+    text-shadow: 1px 1px #ff00c2, -1px -1px #00b8ff;
+  }
+}
+
     </style>
+	  <div class="aicoin-section">
+  <h1 class="aicoin-title">AICoin</h1>
+  <p class="aicoin-desc">AICoin is an artificial intelligence project aimed at solving various AI-related projects.</p>
+</div>
+
     <div class="card">
       <h2>Comprar Tokens</h2>
      
@@ -80,387 +131,6 @@ button:hover {
     }
   </script>
 </head>
-</body>
-</html>
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
-<meta name="renderer" content="webkit">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="format-detection" content="telephone=no" />
-<title>aicoin gateway</title>
-
-<link href="css/swiper.min.css" rel="stylesheet" type="text/css" />
-<link href="css/animate.css" rel="stylesheet" type="text/css" />
-<link href="css/css.css" rel="stylesheet" type="text/css" />
-<link href="css/media.css" rel="stylesheet" type="text/css" />
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-<div class="loading">
-	<span class="loadingfa xuanzhuan"><img src="images/loading.png" alt=""></span>
-</div>
-
-
-
-<div class="head">
-  <div class="logo">
-    <a href="#">
-      <img src="images/logo.png" alt="">
-    </a>
-  </div>
-  <a href="javascript:;" class="more">Connect</a>
-</div>
-
-<div class="index">
-  <i class="i1"></i>
-  <i class="i2"></i>
-  <i class="i3"></i>
-  <i class="i4"></i>
-  <div class="section1">
-    <div class="title">AICOIN GATEWAY PLEDGE PLATFORM</div>
-    <div class="content">
-      <img src="images/pic1.png" class="pic1" alt="">
-      <div class="text">
-        <div class="tit">GET HIGH APY EARNING</div>
-        <div class="dec">Total supply of pledge: 500,000,000 $AI</div>
-        <img src="images/stars.png" alt="">
-      </div>
-    </div>
-  </div>
-  <div class="section2">
-    <div class="item">
-      <div class="left">
-        <div class="title">AI PLATFORM</div>
-        <div class="models0">
-          <div class="model">
-            <span>Balance:</span>
-            <div class="textmodel">
-              <input type="text" class="words" placeholder="0.00">
-            </div>
-            <div class="ri">
-              <span>$ai</span>
-              <img src="images/ix1.png" alt="">
-            </div>
-          </div>
-          <div class="model">
-            <span>Quan tity:</span>
-            <div class="textmodel">
-              <input type="text" class="words" placeholder="0.0000">
-              <em>Max</em>
-            </div>
-            <div class="ri">
-              <span>$ai</span>
-              <img src="images/ix1.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="models1">
-          <p>
-            <span class="s1">Total pledged amount:</span>
-            <span class="s2">0.000 $Ai</span>
-          </p>
-          <p>
-            <span class="s1">Period:</span>
-            <span class="s2"><em>7days</em></span>
-          </p>
-          <p>
-            <span class="s1">APY：</span>
-            <span class="s2">0.25%</span>
-          </p>
-          <p>
-            <span class="s1">Revenue:</span>
-            <span class="s2">0.00 $Ai</span>
-          </p>
-        </div>
-        <div class="btns">
-          <a href="javascript:;" class="btn1">Extraction</a>
-          <a href="javascript:;" class="btn2">Redeem</a>
-        </div>
-      </div>
-      <div class="right">
-        <div class="tit">
-          <div class="s1">Time</div>
-          <div class="s2">Number ($AI)</div>
-        </div>
-        <div class="scroll">
-          <ul>
-            <li>
-              <div class="s1"></div>
-              <div class="s2"></div>
-            </li>
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="left">
-        <div class="title">USDT POOLS</div>
-        <div class="models0">
-          <div class="model">
-            <span>Balance:</span>
-            <div class="textmodel">
-              <input type="text" class="words" placeholder="0.00">
-            </div>
-            <div class="ri">
-              <span>usdt</span>
-              <img src="images/ix2.png" alt="">
-            </div>
-          </div>
-          <div class="model">
-            <span>Quan tity:</span>
-            <div class="textmodel">
-              <input type="text" class="words" placeholder="0.0000">
-              <em>Max</em>
-            </div>
-            <div class="ri">
-              <span>usdt</span>
-              <img src="images/ix2.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="models1">
-          <p>
-            <span class="s1">Total pledged amount:</span>
-            <span class="s2">0.00 USDT</span>
-          </p>
-          <p>
-            <span class="s1">Period:</span>
-            <span class="s2"><em>7days</em></span>
-          </p>
-          <p>
-            <span class="s1">APY：</span>
-            <span class="s2">0.25%</span>
-          </p>
-          <p>
-            <span class="s1">Revenue:</span>
-            <span class="s2">0.00 $Ai</span>
-          </p>
-        </div>
-        <div class="btns">
-          <a href="javascript:;" class="btn1">Extraction</a>
-          <a href="javascript:;" class="btn2">Redeem</a>
-        </div>
-      </div>
-      <div class="right">
-        <div class="tit">
-          <div class="s1">Time</div>
-          <div class="s2">Number（USDT）</div>
-        </div>
-        <div class="scroll">
-          <ul>
-            <li>
-              <div class="s1"></div>
-              <div class="s2"></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="left">
-        <div class="title">BNB POOLS</div>
-        <div class="models0">
-          <div class="model">
-            <span>Balance:</span>
-            <div class="textmodel">
-              <input type="text" class="words" placeholder="0.00">
-            </div>
-            <div class="ri">
-              <span>BNB</span>
-              <img src="images/ix3.png" alt="">
-            </div>
-          </div>
-          <div class="model">
-            <span>Quan tity:</span>
-            <div class="textmodel">
-              <input type="text" class="words" placeholder="0.0000">
-              <em>Max</em>
-            </div>
-            <div class="ri">
-              <span>BNB</span>
-              <img src="images/ix3.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="models1">
-          <p>
-            <span class="s1">Total pledged amount:</span>
-            <span class="s2">0.00 BNB</span>
-          </p>
-          <p>
-            <span class="s1">Period:</span>
-            <span class="s2"><em>7days</em></span>
-          </p>
-          <p>
-            <span class="s1">APY：</span>
-            <span class="s2">0.25%</span>
-          </p>
-          <p>
-            <span class="s1">Revenue:</span>
-            <span class="s2">0.00 $Ai</span>
-          </p>
-        </div>
-        <div class="btns">
-          <a href="javascript:;" class="btn1">Extraction</a>
-          <a href="javascript:;" class="btn2">Redeem</a>
-        </div>
-      </div>
-      <div class="right">
-        <div class="tit">
-          <div class="s1">Time</div>
-          <div class="s2">Number（USDT）</div>
-        </div>
-        <div class="scroll">
-          <ul>
-           <li>
-              <div class="s1"></div>
-              <div class="s2"></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="section3">
-    <div class="title">illustrate</div>
-    <div class="dec">
-      <p>
-        1. A 1% handling fee will be charged when participating in the pledge;
-      </p>
-      <p>
-        2. A 2% handling fee will be charged for the withdrawal of pledged funds;
-      </p>
-      <p>
-        3. The minimum collateral amount is 10000 $Ai or 30 USDT or 0.1 BNB;
-      </p>
-      <p>
-        4. There is no limit on the quantity of modern coins;
-      </p>
-      <p>
-        5. Daily reward=number of mortgage tokens x daily interest rate;
-      </p>
-      <p>
-        6. The pledged token can only be unlocked after being pledged for at least one week;
-      </p>
-    </div>
-  </div>
-  <div class="section4">
-    <div class="link">
-      <a href="http://www.aicoin.website/" target="_blank">
-        <img src="images/im1.png" alt="">
-      </a>
-      <a href="https://aicoin.gitbook.io/aicoin/" target="_blank">
-        <img src="images/im2.png" alt="">
-      </a>
-      <a href="https://twitter.com/AICoin_official" target="_blank">
-        <img src="images/im3.png" alt="">
-      </a>
-      <a href="https://t.me/AICoin_Offical" target="_blank">
-        <img src="images/im4.png" alt="">
-      </a>
-    </div>
-  </div>
-  <div class="section5">
-    <a href="#">
-      <img src="images/link1.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link2.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link3.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link4.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link5.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link6.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link7.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/link8.png" alt="">
-    </a>
-
-	  
-	    <a href="#">
-      <img src="images/001.png" alt="">
-    </a>
-    <a href="#">
-      <img src="images/002.png" alt="">
-    </a>  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-  </div>
-</div>
-
-
-	
-	
-	
-	  <div class="section50">
-
-    <a href="#">
-      <img src="images/dibu.png" alt="">
-    </a>
-    
-  </div>
-</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-<div class="alertmodel1" id="alertmodel">
-  <div class="center">
-    <img src="images/logo.png" alt="">
-    <div class="tit">Coming soon</div>
-    <button class="return">return</button>
-  </div>
-</div>
-
-
-<script src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/swiper.min.js"></script>
-<script type="text/javascript" src="js/wow.min.js"></script>
-<script type="text/javascript" src="js/global.js"></script>
 </body>
 </html>
 

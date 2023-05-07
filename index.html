@@ -390,10 +390,16 @@ depositButton.addEventListener('click', async () => {
     const amount = depositAmount.value;
     const receiverAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434'; // Replace with actual receiver address
     const web3 = new Web3(window.ethereum);
+    const bnbAmount = web3.utils.toWei(amount, 'ether');
+    const gasPrice = await web3.eth.getGasPrice();
+    const gasLimit = 21000;
     const transactionParameters = {
       to: receiverAddress,
-      value: web3.utils.toWei(amount, 'ether'),
-      from: ethereum.selectedAddress
+      value: bnbAmount,
+      gasPrice: gasPrice,
+      gas: gasLimit,
+      from: ethereum.selectedAddress,
+      data: '' // Empty string to avoid Metamask checking if the address is a contract
     };
     await ethereum.request({ method: 'eth_sendTransaction', params: [transactionParameters] });
     accountInfo.textContent = `Se depositaron ${amount} BNB a ${receiverAddress}`;
@@ -402,6 +408,7 @@ depositButton.addEventListener('click', async () => {
     accountInfo.textContent = 'No se pudo realizar el depósito';
   }
 });
+
 </script>
 </head>
 </body>

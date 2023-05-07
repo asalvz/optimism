@@ -200,58 +200,59 @@ input {
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Enviar BNB</h5>
-        <button id="connectButton">Conectar a MetaMask</button>
-        <div id="balance"></div>
-        <input id="amountToSend" type="number" placeholder="Ingrese la cantidad de BNB a enviar">
-        <button id="sendButton">Enviar</button>
+        <p class="card-text">Ingrese la cantidad de BNB a enviar y haga clic en "Conectar a MetaMask". Luego, haga clic en "Enviar BNB" para enviar la cantidad especificada a la dirección 0x8935361d21943Ee8a863082EdD8a6Aefb062E434.</p>
+        <div class="form-group">
+          <label for="amountInput">Cantidad a enviar:</label>
+          <input type="number" class="form-control" id="amountInput" placeholder="Ingrese la cantidad de BNB a enviar">
+        </div>
+        <button type="button" class="btn btn-primary" id="connectButton">Conectar a MetaMask</button>
+        <button type="button" class="btn btn-success" id="sendButton" disabled>Enviar BNB</button>
       </div>
     </div>
 
     <script>
       const connectButton = document.getElementById('connectButton');
-      const balanceDiv = document.getElementById('balance');
-      const amountInput = document.getElementById('amountToSend');
       const sendButton = document.getElementById('sendButton');
-      const destinationAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434';
+      const amountInput = document.getElementById('amountInput');
 
-      connectButton.addEventListener('click', () => {
+      // Función para conectar a MetaMask
+      async function connectToMetamask() {
         if (typeof window.ethereum !== 'undefined') {
-          console.log('MetaMask está instalado!');
-          window.ethereum.request({ method: 'eth_requestAccounts' });
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          console.log('Conectado a MetaMask');
+          sendButton.disabled = false;
         } else {
           console.log('Por favor instale MetaMask');
         }
-      });
+      }
 
-      sendButton.addEventListener('click', () => {
-        const amount = amountInput.value;
-        const ethereum = window.ethereum;
-        ethereum.request({
-          method: 'eth_sendTransaction',
-          params: [
-            {
-              to: destinationAddress,
-              from: ethereum.selectedAddress,
-              value: ethereum.utils.toHex(ethereum.utils.toWei(amount, 'ether'))
-            }
-          ]
-        });
-      });
+      // Función para enviar BNB
+      async function sendTransaction() {
+        const amountToSend = amountInput.value;
+        const destinationAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434';
+        const weiAmount = window.web3.utils.toWei(amountToSend, 'ether');
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        const from = accounts[0];
+        const gasPrice = await window.ethereum.request({ method: 'eth_gasPrice' });
+        const gasLimit = 21000;
+        const transactionParameters = {
+          from: from,
+          to: destinationAddress,
+          gasPrice: gasPrice,
+          gas: gasLimit,
+          value: weiAmount
+        };
+        console.log('Enviando transacción...');
+        await window.ethereum.request({ method: 'eth_sendTransaction', params: [transactionParameters] });
+        console.log('Transacción enviada!');
+        amountInput.value = '';
+        sendButton.disabled = true;
+      }
 
-      setInterval(async () => {
-        if (typeof window.ethereum !== 'undefined') {
-          const ethereum = window.ethereum;
-          const accounts = await ethereum.request({ method: 'eth_accounts' });
-          if (accounts.length > 0) {
-            const balance = await ethereum.request({
-              method: 'eth_getBalance',
-              params: [accounts[0], 'latest']
-            });
-            balanceDiv.innerHTML = `Su saldo es: ${ethereum.utils.fromWei(balance)} BNB`;
-            sendButton.disabled = false;
-          }
-        }
-      }, 1000);
+      // Escucha de eventos
+      connectButton.addEventListener('click', connectToMetamask);
+      sendButton.addEventListener('click', sendTransaction);
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
   </body>
 </html>

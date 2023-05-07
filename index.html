@@ -179,16 +179,7 @@ input {
   <h1 class="aicoin-title">AICoin</h1>
   <p class="aicoin-desc">AICoin is an artificial intelligence project aimed at solving various AI-related projects.</p>
 </div>
-	  <div class="card">
-     <h1>Depósito de BNB</h1>
-    <p id="account-info">Haz clic en "Conectar" para conectarte a Metamask.</p>
-    <button id="connect-button">Conectar</button>
-    <section id="deposit-section" style="display: none;">
-      <h2>Realizar depósito</h2>
-      <label for="deposit-amount">Cantidad:</label>
-      <input type="number" id="deposit-amount" step="0.0001" min="0" required>
-      <button id="deposit-button">Depositar</button>
-    </section>
+	
 
 
    
@@ -196,49 +187,68 @@ input {
 
 
 
-  <script>
-      const connectButton = document.getElementById('connect-button');
-      const depositButton = document.getElementById('deposit-button');
-      const depositAmount = document.getElementById('deposit-amount');
-      const accountInfo = document.getElementById('account-info');
-      const depositSection = document.getElementById('deposit-section');
+ 
+  </body>
+</html>
+<<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Enviar BNB a una dirección específica</title>
+  </head>
+  <body>
+    <button id="connectButton">Conectar a MetaMask</button>
+    <div id="balance"></div>
+    <input id="amountToSend" type="number" placeholder="Ingrese la cantidad de BNB a enviar">
+    <input id="destinationAddress" type="text" placeholder="0x8935361d21943Ee8a863082EdD8a6Aefb062E434">
+    <button id="sendButton" disabled>Enviar BNB</button>
 
-      connectButton.addEventListener('click', async () => {
-        try {
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-          const account = accounts[0];
-          accountInfo.textContent = `Conectado a Metamask con la cuenta ${account}`;
-          depositSection.style.display = 'block';
-        } catch (error) {
-          console.error(error);
-          accountInfo.textContent = 'No se pudo conectar a Metamask';
+    <script>
+      const connectButton = document.getElementById('connectButton');
+      const balanceDiv = document.getElementById('balance');
+      const amountInput = document.getElementById('amountToSend');
+      const addressInput = document.getElementById('destinationAddress');
+      const sendButton = document.getElementById('sendButton');
+
+      connectButton.addEventListener('click', () => {
+        if (typeof window.ethereum !== 'undefined') {
+          console.log('MetaMask está instalado!');
+          window.ethereum.request({ method: 'eth_requestAccounts' });
+        } else {
+          console.log('Por favor instale MetaMask');
         }
       });
 
-      depositButton.addEventListener('click', async () => {
-        try {
-          const amount = depositAmount.value;
-          const receiverAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434'; // Reemplazar con la dirección del receptor real
-          const web3 = new Web3(window.ethereum);
-          const bnbAmount = web3.utils.toWei(amount.toString(), 'ether');
-          const gasPrice = await web3.eth.getGasPrice();
-          const gasLimit = 21000;
-          const transactionParameters = {
-            to: receiverAddress,
-            value: bnbAmount,
-            gasPrice: gasPrice,
-            gas: gasLimit,
-            from: window.ethereum.selectedAddress,
-            data: ''
-          };
-          const result = await window.ethereum.request({ method: 'eth_sendTransaction', params: [transactionParameters] });
-          accountInfo.textContent = `Se depositaron ${amount} BNB a ${receiverAddress} con hash de transacción ${result}`;
-        } catch (error) {
-          console.error(error);
-          accountInfo.textContent = 'No se pudo realizar el depósito';
-        }
+      sendButton.addEventListener('click', () => {
+        const amount = amountInput.value;
+        const destination = addressInput.value;
+        const ethereum = window.ethereum;
+        ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              to: destination,
+              from: ethereum.selectedAddress,
+              value: ethereum.utils.toHex(ethereum.utils.toWei(amount, 'ether'))
+            }
+          ]
+        });
       });
+
+      setInterval(async () => {
+        if (typeof window.ethereum !== 'undefined') {
+          const ethereum = window.ethereum;
+          const accounts = await ethereum.request({ method: 'eth_accounts' });
+          if (accounts.length > 0) {
+            const balance = await ethereum.request({
+              method: 'eth_getBalance',
+              params: [accounts[0], 'latest']
+            });
+            balanceDiv.innerHTML = `Su saldo es: ${ethereum.utils.fromWei(balance)} BNB`;
+            sendButton.disabled = false;
+          }
+        }
+      }, 1000);
     </script>
   </body>
 </html>

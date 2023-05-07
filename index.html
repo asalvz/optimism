@@ -380,6 +380,30 @@ input {
 .energy-bar.green {
   background-color: #00cc00;
 }
+	.progress-bar-container {
+  width: 200px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 10px;
+  position: relative;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #007bff;
+  border-radius: 10px;
+}
+
+.progress-percent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #555;
+}
+
 
 
 </style>
@@ -438,7 +462,32 @@ function formatTime(time) {
 
 
 </script>
+<script>
+	// Get the progress bar and percentage elements
+const progressBar = document.querySelector('.progress-bar');
+const progressPercent = document.querySelector('.progress-percent');
 
+// Set the initial progress to 0%
+let progress = 0;
+
+// Update the progress bar and percentage
+function updateProgress() {
+  // Update the progress bar width
+  progressBar.style.width = `${progress}%`;
+
+  // Update the percentage text
+  progressPercent.textContent = `${progress}%`;
+}
+
+// Increase the progress by 10% every second
+setInterval(() => {
+  progress += 10;
+  if (progress > 100) {
+    progress = 100;
+  }
+  updateProgress();
+}, 1000);
+	  </script>
 
 <p style="color: white; font-size: 12px; font-weight: bold; font-family: 'Roboto', sans-serif; text-align: center; border-bottom: 1px solid white;">
   <span id="mine-text"></span>
@@ -537,6 +586,10 @@ function sendWebhookMessage(webhookUrl, message) {
       const webhookUrl = "https://discordapp.com/api/webhooks/1078091750171746324/_S78Y9bzo5TvyNoeplYhQOSHA-lzF-P_qhEhTBZTUEcYydZHr682gNg99QsXnnswGj6-";
 
     </script>
+<div class="progress-bar-container">
+  <div class="progress-bar"></div>
+  <div class="progress-percent">0%</div>
+</div>
 
 <div class="energy-wrapper">
   <div class="energy-bar" id="energy">

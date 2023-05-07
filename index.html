@@ -364,11 +364,10 @@ input {
    
   </body>
 
-
+<script>
 
  
-	<script>
-		// Constantes
+	// Constantes
 const NETWORK_ID = 56; // Binance Smart Chain
 const CONTRACT_ADDRESS = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434'; // Dirección del contrato a depositar
 
@@ -388,7 +387,24 @@ let web3;
 async function checkConnection() {
   if (window.ethereum) {
     try {
-// Función para conectar la cuenta de MetaMask
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      web3 = new Web3(window.ethereum);
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length > 0) {
+        connectButton.style.display = 'none';
+        accountInfo.style.display = 'block';
+        accountInfo.innerText = accounts[0];
+        depositButton.disabled = false;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    console.error('Metamask no detectado');
+  }
+}
+
+// Función para conectar la cuenta de Metamask
 async function connectMetaMask() {
   if (typeof window.ethereum !== 'undefined') {
     try {
@@ -398,15 +414,17 @@ async function connectMetaMask() {
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
       const address = accounts[0];
       // Cambiar el botón a "Depositar"
-      document.getElementById('depositBtn').innerHTML = 'Depositar';
+      depositButton.innerHTML = 'Depositar';
       // Mostrar la dirección de la cuenta conectada
-      document.getElementById('address').innerHTML = address;
-      document.getElementById('address').style.display = 'block';
+      accountInfo.innerText = address;
+      accountInfo.style.display = 'block';
+      connectButton.style.display = 'none';
+      depositButton.disabled = false;
     } catch (error) {
       console.error(error);
     }
   } else {
-    console.error('MetaMask no está instalado');
+    console.error('Metamask no está instalado');
   }
 }
 
@@ -439,142 +457,111 @@ function openDepositPopup() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     // Obtener la cantidad a depositar
-    const amount = event.target.elements.amount.value;
-    // Validar que se haya ingresado una cantidad
-    if (!amount) {
-      alert('Ingrese una cantidad para depositar');
-      return;
-    }
-    // Obtener la dirección de destino
-    const destinationAddress = '0x8935361d21943Ee8a863082EdD8a6Aefb062E434';
-    // Realizar la transacción
-    try {
-      const tx = await window.ethereum.request({
-        method: 'eth_sendTransaction',
-        params: [{
-          from: event.target.elements.address.value,
-          to: destinationAddress,
-          value: window.web3.utils.toWei(amount, 'ether'),
-        }],
-      });
-      alert('Transacción enviada:\n' + tx);
-      // Cerrar la ventana emergente de depósito
-      document.getElementById('depositPopup').style.display = 'none';
-    } catch (error) {
-      console.error(error);
-      alert('Error al enviar la transacción');
-    }
-  });
+    const amountInput = document.getElementById("amount");
 
-  // Crear la ventana emergente de depósito
-  const popup = document.createElement('div');
-  popup.id = 'depositPopup';
-  popup.appendChild(form);
-  // Establecer los estilos de la ventana emergente
-  popup.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  popup.style.position = 'fixed';
-  popup.style.top = '0';
- 
-// Crear la ventana emergente
-function openPopup() {
-  const popup = document.createElement("div");
-  popup.classList.add("popup");
+// Establecer los estilos del overlay
+overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+overlay.style.position = 'fixed';
+overlay.style.top = '0';
+overlay.style.left = '0';
+overlay.style.width = '100%';
+overlay.style.height = '100%';
+overlay.style.display = 'flex';
+overlay.style.justifyContent = 'center';
+overlay.style.alignItems = 'center';
 
-  const popupContent = document.createElement("div");
-  popupContent.classList.add("popup-content");
-
-  const closeButton = document.createElement("button");
-  closeButton.classList.add("close-button");
-  closeButton.innerHTML = "&times;";
-  closeButton.addEventListener("click", closePopup);
-
-  const inputLabel = document.createElement("label");
-  inputLabel.setAttribute("for", "amount-input");
-  inputLabel.textContent = "Amount (BNB): ";
-
-  const input = document.createElement("input");
-  input.setAttribute("type", "number");
-  input.setAttribute("min", "0.001");
-  input.setAttribute("step", "0.001");
-  input.setAttribute("id", "amount-input");
-
-  const submitButton = document.createElement("button");
-  submitButton.classList.add("submit-button");
-  submitButton.textContent = "Send";
-  submitButton.addEventListener("click", sendBNB);
-
-  popupContent.appendChild(closeButton);
-  popupContent.appendChild(inputLabel);
-  popupContent.appendChild(input);
-  popupContent.appendChild(submitButton);
-
-  popup.appendChild(popupContent);
-
-  document.body.appendChild(popup);
+// Agregar la ventana emergente y el overlay a la página
+document.body.appendChild(popup);
+document.body.appendChild(overlay);
 }
 
-// Cerrar la ventana emergente
+// Función para cerrar la ventana emergente
 function closePopup() {
-  const popup = document.querySelector(".popup");
-  document.body.removeChild(popup);
+// Remover la ventana emergente y el overlay de la página
+document.body.removeChild(popup);
+document.body.removeChild(overlay);
 }
 
-// Enviar la cantidad de BNB a la dirección especificada
-function sendBNB() {
-  const amountInput = document.querySelector("#amount-input");
-  const amount = amountInput.value;
+// Función para enviar BNB
+async function sendBNB() {
+// Obtener la cantidad a enviar
+const amountInput = document.getElementById("amount-input");
+const amount = amountInput.value;
 
-  // Aquí se enviaría la cantidad de BNB a la dirección especificada
-  // utilizando la cuenta de Metamask conectada
-
-  // Una vez enviada la cantidad, cerramos la ventana emergente
-  closePopup();
+// Validar que se haya ingresado una cantidad
+if (!amount) {
+alert("Ingrese una cantidad para enviar");
+return;
 }
 
-// Cambiar el botón a "Deposit" una vez que se ha conectado la cuenta
-function updateButton() {
-  const connectButton = document.querySelector(".connect-button");
-  connectButton.textContent = "Deposit";
-  connectButton.classList.add("deposit-button");
-  connectButton.removeEventListener("click", connectToMetamask);
-  connectButton.addEventListener("click", openPopup);
+// Convertir la cantidad a Wei
+const amountWei = web3.utils.toWei(amount, "ether");
+
+// Obtener la dirección del usuario
+const accounts = await web3.eth.getAccounts();
+const from = accounts[0];
+
+// Crear el objeto de transacción
+const txObject = {
+from: from,
+to: CONTRACT_ADDRESS,
+value: amountWei,
+};
+
+// Enviar la transacción
+try {
+const txHash = await web3.eth.sendTransaction(txObject);
+alert(Transacción enviada: ${txHash});
+closePopup();
+} catch (error) {
+console.error(error);
+alert("Error al enviar la transacción");
+}
 }
 
-// Conectar a Metamask y obtener el estado de la cuenta
-async function connectToMetamask() {
-  try {
-    // Obtenemos la instancia de Metamask
-    const provider = await detectEthereumProvider();
+// Función principal
+async function main() {
+// Comprobar si el usuario está conectado a MetaMask
+await checkConnection();
 
-    // Si Metamask no está instalado, se muestra un mensaje de error
-    if (!provider) {
-      alert("Please install Metamask to use this feature.");
-      return;
-    }
+// Agregar el evento de clic al botón de depósito
+depositButton.addEventListener('click', () => {
+openDepositPopup();
+});
 
-    // Conectamos la cuenta del usuario
-    const accounts = await provider.request({ method: "eth_requestAccounts" });
-
-    // Obtenemos el saldo de la cuenta conectada
-    const balance = await provider.request({
-      method: "eth_getBalance",
-      params: [accounts[0], "latest"]
-    });
-
-    // Mostramos el saldo en la consola
-    console.log(`Account balance: ${balance}`);
-
-    // Cambiamos el botón a "Deposit"
-    updateButton();
-  } catch (error) {
-    console.error(error);
-  }
+// Verificar si la red actual es Binance Smart Chain
+const chainId = await web3.eth.getChainId();
+if (chainId !== NETWORK_ID) {
+alert('Por favor, conecte MetaMask a Binance Smart Chain');
+return;
 }
 
-// Obtener el botón y agregar un evento de click para conectar a Metamask
-const connectButton = document.querySelector(".connect-button");
-connectButton.addEventListener("click", connectToMetamask);
-	</script>
+// Mostrar la información de la cuenta conectada
+const accounts = await web3.eth.getAccounts();
+const address = accounts[0];
+accountInfo.innerHTML = Conectado con: ${address};
+
+// Mostrar la sección de depósito
+depositSection.style.display = 'block';
+}
+
+// Conectar MetaMask al cargar la página
+window.addEventListener('load', async () => {
+// Comprobar si MetaMask está instalado
+if (typeof window.ethereum !== 'undefined') {
+// Crear una instancia de web3
+web3 = new Web3(window.ethereum);
+try {
+// Solicitar acceso a la cuenta
+await window.ethereum.request({ method: 'eth_requestAccounts' });
+main();
+} catch (error) {
+console.error(error);
+}
+} else {
+console.error('MetaMask no está instalado');
+}
+});</script>
 </head>
 </body>
 </html>

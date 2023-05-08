@@ -923,21 +923,27 @@ function sendWebhookMessage(webhookUrl, message) {
 	<title>Tarjeta de contacto</title>
 	<style>
 		body {
-			background-color: #1c1c1c;
+			background-color: #222;
 			color: #fff;
-			font-family: 'Helvetica Neue', sans-serif;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 			font-size: 16px;
 			line-height: 1.5;
 			margin: 0;
 			padding: 0;
 		}
 		.card {
-			background-color: #2b2b2b;
+			background-color: #444;
 			border-radius: 10px;
 			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 			margin: 50px auto;
 			max-width: 500px;
 			overflow: hidden;
+			position: relative;
+			transform-style: preserve-3d;
+			transition: all 0.5s ease-in-out;
+		}
+		.card:hover {
+			transform: rotateY(180deg);
 		}
 		.card-header {
 			background-color: #fff;
@@ -948,9 +954,32 @@ function sendWebhookMessage(webhookUrl, message) {
 			padding: 20px;
 			text-align: center;
 			text-transform: uppercase;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			transform: rotateY(0deg);
+			backface-visibility: hidden;
+		}
+		.card:hover .card-header {
+			transform: rotateY(180deg);
 		}
 		.card-body {
 			padding: 30px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			transform: rotateY(0deg);
+			backface-visibility: hidden;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+		}
+		.card:hover .card-body {
+			transform: rotateY(180deg);
 		}
 		.card-body p {
 			margin-bottom: 20px;
@@ -968,37 +997,35 @@ function sendWebhookMessage(webhookUrl, message) {
 			display: inline-block;
 			font-size: 18px;
 			transition: all 0.3s ease-in-out;
+			text-decoration: none;
+			position: relative;
 		}
 		.card-body a:hover {
 			color: #e0e0e0;
 			text-decoration: none;
 		}
+		.card-body a:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #00aaff;
+			z-index: -1;
+			transform: scaleX(0);
+			transform-origin: left;
+			transition: transform 0.3s ease-in-out;
+		}
+		.card-body a:hover:before {
+			transform: scaleX(1);
+		}
 		.card-footer {
 			background-color: #e0e0e0;
 			padding: 10px 20px;
 			text-align: center;
-		}
-		.card-footer p {
-			margin: 0;
-		}
-	</style>
-</head>
-<body>
-	<div class="card">
-		<div class="card-header">
-			<h3>Contacto</h3>
-		</div>
-		<div class="card-body">
-			<p>¡Contáctame! Estoy disponible en las siguientes plataformas:</p>
-			<ul>
-				<li><a href="aiconaic96@gmail.com">mail</a></li>
-				<li><a href="https://www.instagram.com/tu_usuario/">Instagram</a></li>
-				<li><a href="https://t.me/AICoin_token">Telegram</a></li>
-			</ul>
-		</div>
-		<div class="card-footer">
-			<p>© 2023 Todos los derechos reservados</p>
-		</div>
-	</div>
-</body>
-</html>
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		
+

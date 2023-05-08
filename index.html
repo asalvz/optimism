@@ -1028,4 +1028,64 @@ function sendWebhookMessage(webhookUrl, message) {
 			bottom: 0;
 			left: 0;
 		
-
+		width: 100%;
+		transform: rotateY(0deg);
+		backface-visibility: hidden;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height: 50px;
+	}
+	.card-footer a {
+		color: #333;
+		font-size: 16px;
+		font-weight: 700;
+		margin: 0 10px;
+		text-transform: uppercase;
+		transition: all 0.3s ease-in-out;
+		text-decoration: none;
+		position: relative;
+	}
+	.card-footer a:hover {
+		color: #00aaff;
+		text-decoration: none;
+	}
+	.card-footer a:before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 0;
+		height: 2px;
+		background-color: #333;
+		transition: width 0.3s ease-in-out;
+	}
+	.card-footer a:hover:before {
+		width: 100%;
+	}
+</style>
+</head>
+<body>
+	<div class="card">
+		<div class="card-header">
+			<h1>Contacto</h1>
+		</div>
+		<div class="card-body">
+			<p>¡Hola! ¿Quieres ponerte en contacto conmigo?</p>
+			<ul>
+				<li><strong>Correo electrónico:</strong> ejemplo@ejemplo.com</li>
+				<li><strong>Instagram:</strong> <a href="#">@ejemplo</a></li>
+				<li><strong>Telegram:</strong> <a href="#">@ejemplo</a></li>
+			</ul>
+				<a href="#">Enviar mensaje</a>
+		</div>
+		<div class="card-footer">
+			<a href="#">Inicio</a>
+			<a href="#">Acerca de</a>
+			<a href="#">Contacto</a>
+		</div>
+	</div>
+</body>
+</html>

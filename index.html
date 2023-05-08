@@ -842,11 +842,11 @@ function sendWebhookMessage(webhookUrl, message) {
 			box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 			opacity: 0;
 			transition: opacity 0.3s ease-out;
-			animation: color-change 2s ease-in-out infinite alternate, rain 1s linear infinite;
-			background-image: url('https://i.imgur.com/iSTWlfe.png');
-			background-size: 150%;
-			background-repeat: no-repeat;
-			background-position: center center;
+			animation: rain 2s linear infinite;
+			background-image: url('https://i.imgur.com/5B5dkpN.png');
+			background-size: 200%;
+			background-repeat: repeat-x;
+			background-position: 0% 0%;
 		}
 
 		.popup.active {
@@ -862,33 +862,58 @@ function sendWebhookMessage(webhookUrl, message) {
 			cursor: pointer;
 		}
 
-		@keyframes color-change {
-			0% {
-				background-color: #FFA500;
+		@keyframes rain {
+			from {
+				background-position: 0% 0%;
 			}
-			50% {
+			to {
+				background-position: 0% 100%;
+			}
+		}
+
+		@keyframes thunder {
+			0% {
+				opacity: 0;
+			}
+			25% {
+				opacity: 1;
+			}
+			26% {
+				opacity: 0;
+			}
+			30% {
+				opacity: 0;
 				background-color: #000;
 			}
-			 100% {
+			32% {
+				background-color: #FFA500;
+			}
+			100% {
 				background-color: #FFA500;
 			}
 		}
 
-		@keyframes rain {
-			from {
-				background-position: 0px 0px;
-			}
-			to {
-				background-position: 0px 1000px;
-			}
+		.thunder {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			opacity: 0;
+			background-color: #FFA500;
+			animation: thunder 2s linear infinite;
+			z-index: -1;
 		}
 	</style>
 </head>
 <body>
+	<h1>Welcome to my website</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec orci vel elit rhoncus commodo. Nulla facilisi. Nullam nec sem in sapien cursus congue.</p>
 
 	<div class="popup" id="popup">
 		<span class="close" onclick="closePopup()">&times;</span>
 		<p>Buy 1 BNB or 1 ETH of AIC and get an additional 27% of tokens. With 10% token mining after 30 days of staking here on the site.</p>
+		<div class="thunder"></div>
 	</div>
 
 	<script type="text/javascript">

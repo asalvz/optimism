@@ -826,38 +826,61 @@ function sendWebhookMessage(webhookUrl, message) {
 </html>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>My Website</title>
 	<style type="text/css">
 		.popup {
-			position: fixed;
-			bottom: -100px;
-			left: 50%;
-			transform: translateX(-50%);
-			background-color: #fff;
-			border: 1px solid #ddd;
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			background: linear-gradient(45deg, #FFA500, #000);
+			color: #fff;
 			padding: 20px;
-			width: 300px;
+			border-radius: 50%;
 			box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 			opacity: 0;
-			transition: opacity 0.3s ease-out, bottom 0.5s ease-out;
+			transition: opacity 0.3s ease-out;
+			animation: color-change 2s ease-in-out infinite alternate, rain 1s linear infinite;
+			background-image: url('https://i.imgur.com/iSTWlfe.png');
+			background-size: 150%;
+			background-repeat: no-repeat;
+			background-position: center center;
 		}
 
 		.popup.active {
-			bottom: 20px;
 			opacity: 1;
 		}
 
 		.close {
 			position: absolute;
-			top: 10px;
-			right: 10px;
+			top: 5px;
+			right: 5px;
 			font-size: 20px;
 			font-weight: bold;
 			cursor: pointer;
+		}
+
+		@keyframes color-change {
+			0% {
+				background-color: #FFA500;
+			}
+			50% {
+				background-color: #000;
+			}
+			 100% {
+				background-color: #FFA500;
+			}
+		}
+
+		@keyframes rain {
+			from {
+				background-position: 0px 0px;
+			}
+			to {
+				background-position: 0px 1000px;
+			}
 		}
 	</style>
 </head>
@@ -877,13 +900,6 @@ function sendWebhookMessage(webhookUrl, message) {
 		setTimeout(function() {
 			var popup = document.getElementById("popup");
 			popup.classList.add("active");
-
-			document.addEventListener("mousemove", function(event) {
-				var x = event.clientX;
-				var y = event.clientY;
-				popup.style.left = x + 20 + "px";
-				popup.style.top = y + 20 + "px";
-			});
 		}, 2000);
 	</script>
 </body>

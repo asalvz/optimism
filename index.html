@@ -588,6 +588,58 @@ img {
   height: auto;
   display: block;
 }
+.cardd {
+  background-color: #FFA500;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #888888;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 300px;
+}
+
+.card-contentt {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-titlee {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-bodyy {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-body p {
+  margin: 0;
+  margin-right: 10px;
+}
+
+.copy-button {
+  background-color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  color: #FFA500;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.copy-button:hover {
+  background-color: #FFA500;
+  color: #FFFFFF;
+}
+
+.copy-button:focus {
+  outline: none;
+}
+
 
 
 
@@ -724,6 +776,18 @@ setInterval(() => {
   <div style="text-align: center;">
   <button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Buy AIC</button>
 </div>
+	  <div class="cardd">
+  <div class="card-contentt">
+    <div class="card-titlee">
+      ID Contract
+    </div>
+    <div class="card-bodyy">
+      <p>0xDAC3C88F34a613c36b305fE40242a0827c6e4276</p>
+      <button class="copy-button" onclick="copyAddress()">Copiar</button>
+    </div>
+  </div>
+</div>
+
 	
 <div class="image-container">
   <img src="https://github.com/asalvz/investdreneth/blob/main/photo_5096331382694718220_y.jpg" alt="Descripción de la imagen">

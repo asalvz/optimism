@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="utf-8">
-	<title>aic</title>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <title>AICoin AIC </title>
 <meta content="AICoin AIC" property="og:title">
 
@@ -47,7 +45,74 @@
 
 
 </head>
-	
+	<style>
+		body {
+ 
+ 
+
+  .Home_soon__8s2ww button {
+    background-color: #3498DB;
+    border: 2px solid #3498DB;
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-align: right;    
+    float: right;    
+    display: grid;
+    margin-right: auto;
+    margin-left: auto; 
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+    outline: none;
+    padding: 13px 23px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
+    user-select: none;
+    -webkit-user-select: none;
+    width: auto;
+    animation: blink 2s linear infinite; /* Agregamos la animación blink */
+}
+
+.Home_soon__8s2ww button:focus-visible {
+    box-shadow: #27AE60 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+    transition: box-shadow .2s;
+}
+
+.Home_soon__8s2ww button:active {
+    background-color: #F012BE; /* Cambiamos el color de fondo al hacer clic */
+    border-color: #000000;
+    transform: scale(.96);
+    animation: none; /* Detenemos la animación */
+}
+
+.Home_soon__8s2ww button:disabled {
+    border-color: #DDDDDD;
+    color: #DDDDDD;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* Definimos la animación blink */
+@keyframes blink {
+    50% {
+        background-color: #F012BE;
+        color: white;
+    }
+    100% {
+        background-color: #222;
+        color: white;
+    }
+}
+
+</style>
+
 	
 
 
@@ -119,13 +184,13 @@
 
     <style>
       body {
-	       #background-video {
+	      #background-video {
         position: fixed;
         right: 0;
         bottom: 0;
         min-width: 100%;
         min-height: 100%;
-        z-index: -2;
+        z-index: -1;
       }
 
 
@@ -141,67 +206,6 @@
     width: auto;
     height: 100%;
   }
-}
-
-  .Home_soon__8s2ww button {
-    background-color: #3498DB;
-    border: 2px solid #3498DB;
-    color: white;
-    padding: 10px;
-    border-radius: 15px;
-    box-sizing: border-box;
-    cursor: pointer;
-    text-align: right;    
-    float: right;    
-    display: grid;
-    margin-right: auto;
-    margin-left: auto; 
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 20px;
-    margin: 0;
-    outline: none;
-    padding: 13px 23px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    touch-action: manipulation;
-    transition: box-shadow .2s, -ms-transform .1s, -webkit-transform .1s, transform .1s;
-    user-select: none;
-    -webkit-user-select: none;
-    width: auto;
-    animation: blink 2s linear infinite; /* Agregamos la animación blink */
-}
-
-.Home_soon__8s2ww button:focus-visible {
-    box-shadow: #27AE60 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
-    transition: box-shadow .2s;
-}
-
-.Home_soon__8s2ww button:active {
-    background-color: #F012BE; /* Cambiamos el color de fondo al hacer clic */
-    border-color: #000000;
-    transform: scale(.96);
-    animation: none; /* Detenemos la animación */
-}
-
-.Home_soon__8s2ww button:disabled {
-    border-color: #DDDDDD;
-    color: #DDDDDD;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
-/* Definimos la animación blink */
-@keyframes blink {
-    50% {
-        background-color: #F012BE;
-        color: white;
-    }
-    100% {
-        background-color: #222;
-        color: white;
-    }
 }
   
 
@@ -234,6 +238,11 @@ button:hover {
 	  
 
 .aicoin-title {
+	 position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
   font-family: 'Pixel', Arial, sans-serif;
   font-size: 60px;
   color: #fff;
@@ -375,8 +384,43 @@ input {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
   border-radius: 10px;
+}	
+
+
 }
-	  .card-container {
+
+
+    </style>
+	<div class="cardd-transparent">
+  <div class="aicoin-sectionn">
+    <h1 class="aicoin-title">AICoin</h1>
+    <p class="aicoin-desc">AICoin is an artificial intelligence project aimed at solving various AI-related projects.</p>
+  </div>
+</div>
+
+
+
+   
+  </body>
+
+
+
+ 
+  </body>
+</html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>aic</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <style>
+
+      body {
+        
+      }
+
+      .card-container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -441,7 +485,14 @@ input {
       button:hover {
         background-color: #1E0291;
       }
-	        .animated-text {
+    </style>
+  </head>
+  <body>
+   
+<h3>Buy<span class="animated-text">AIC</span> <span class="version" style="font-size: 0.8em; font-family: 'Courier New', Courier, monospace; color:dimgray"><span class="counter"></span></span></h3>
+
+<style>
+    .animated-text {
         animation: change-colors 3s infinite;
     }
 
@@ -572,42 +623,6 @@ input {
 }
 
 
-
-
-}
-
-
-    </style>
-	<div class="cardd-transparent">
-  <div class="aicoin-sectionn">
-    <h1 class="aicoin-title">AICoin</h1>
-    <p class="aicoin-desc">AICoin is an artificial intelligence project aimed at solving various AI-related projects.</p>
-  </div>
-</div>
-
-
-
-   
-  </body>
-
-
-
-
-    <style>
-
-      body {
-        
-      }
-
-    
-    </style>
-  </head>
-  <body>
-   
-<h3>Buy<span class="animated-text">AIC</span> <span class="version" style="font-size: 0.8em; font-family: 'Courier New', Courier, monospace; color:dimgray"><span class="counter"></span></span></h3>
-
-<style>
-  
 
 </style>
 

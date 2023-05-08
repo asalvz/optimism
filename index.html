@@ -179,12 +179,37 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
   </head>
   <body>
+	  <video autoplay muted loop id="video-background">
+  <source src="https://gateway.pinata.cloud/ipfs/QmUpJKYpzsUGeHybcfxMyp6Q1a9Y9XeMKHXjcnU9qFnqf5?_gl=1*tlr57w*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4MzUxNDcxMS41LjAuMTY4MzUxNDcxMS42MC4wLjA." type="video/mp4">
+  <source src="https://gateway.pinata.cloud/ipfs/QmdjXQ9QSikHaG4ThP9JFvCCNRD33AdQvL5rztoUpCFopq?_gl=1*18ncfcm*rs_ga*NTgzMzM3YTMtOWRiMS00MjJmLTgyOGItODNiMzI4NGEzZmQw*rs_ga_5RMPXG14TE*MTY4MzUxNDcxMS41LjEuMTY4MzUxNTAzNS42MC4wLjA." type="video/webm">
+  Tu navegador no soporta la etiqueta video.
+</video>
+
     <style>
       body {
-   background-image: url("https://gateway.pinata.cloud/ipfs/QmXPHGwqnCt4ZiHJZb2jj1CQxL82takAjqrDSXfFSwqSkJ");
-  background-size: cover;
-  background-position: center;
+  #video-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
 }
+
+@media (min-aspect-ratio: 16/9) {
+  #video-background {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  #video-background {
+    width: auto;
+    height: 100%;
+  }
+}
+
 
 .card {
   background-color: #222;

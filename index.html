@@ -791,3 +791,49 @@ function sendWebhookMessage(webhookUrl, message) {
 
   </body>
 </html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Estado del Token</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.4.umd.min.js" integrity="sha384-nfwB6rhekJ6fYRp+dD3/kqX9+CPQryvMAAmzFJQ2/VG8z1WovxsakwY0cTtZ1HT8"></script>
+  </head>
+  <body>
+    <div class="card">
+      <h3>Estado del Token</h3>
+      <p>Suministro total: <span id="total-supply"></span></p>
+      <p>Cantidad quemada: <span id="burned-tokens"></span></p>
+      <p>Transferencias realizadas: <span id="transfers-made"></span></p>
+      <button id="update-button">Actualizar</button>
+    </div>
+
+    <script>
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contractAddress = "CONTRATO-ADDRESS-AQUI";
+      const contractABI = [
+        "function totalSupply() view returns (uint256)",
+        "function burnedTokens() view returns (uint256)",
+        "function transfersMade() view returns (uint256)"
+      ];
+      const contract = new ethers.Contract(contractAddress, contractABI, provider);
+
+      const totalSupplyField = document.getElementById('total-supply');
+      const burnedTokensField = document.getElementById('burned-tokens');
+      const transfersMadeField = document.getElementById('transfers-made');
+      const updateButton = document.getElementById('update-button');
+
+      async function updateTokenState() {
+        const totalSupply = await contract.totalSupply();
+        const burnedTokens = await contract.burnedTokens();
+        const transfersMade = await contract.transfersMade();
+
+        totalSupplyField.textContent = totalSupply.toString();
+        burnedTokensField.textContent = burnedTokens.toString();
+        transfersMadeField.textContent = transfersMade.toString();
+      }
+
+      updateTokenState();
+
+      updateButton.addEventListener('click', updateTokenState);
+    </script>
+  </body>
+</html>

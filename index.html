@@ -920,40 +920,63 @@ function sendWebhookMessage(webhookUrl, message) {
 <head>
 	<title>Deposits Card</title>
 	<style>
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			background-color: #f1f1f1;
+		}
+		
 		.card {
 			border: 1px solid #ccc;
 			border-radius: 5px;
 			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-			margin: 10px;
 			padding: 10px;
+			background-color: #fff;
+			max-width: 350px;
+			width: 100%;
+			margin: 0 auto;
 		}
 
 		.card-header {
 			background-color: #f1f1f1;
 			border-bottom: 1px solid #ccc;
 			padding: 10px;
+			margin-bottom: 10px;
+			font-size: 1.25rem;
+			font-weight: bold;
+			text-align: center;
 		}
 
 		.card-body {
 			padding: 10px;
+			font-size: 0.9rem;
+			line-height: 1.2rem;
+			color: #333;
 		}
 
 		#deposits-list {
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
+			max-height: 120px;
+			overflow-y: auto;
 		}
 
 		.deposit-item {
-			margin-bottom: 10px;
+			margin-bottom: 5px;
+			padding: 5px;
+			background-color: #f1f1f1;
+			border-radius: 3px;
+			box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 		}
 	</style>
 </head>
 <body>
 	<div class="card">
-		<div class="card-header">
-			<h3>Recent Deposits</h3>
-		</div>
+		<div class="card-header">Recent Deposits</div>
 		<div class="card-body">
 			<ul id="deposits-list"></ul>
 		</div>
@@ -980,4 +1003,3 @@ function sendWebhookMessage(webhookUrl, message) {
 	</script>
 </body>
 </html>
-

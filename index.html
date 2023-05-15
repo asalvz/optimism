@@ -721,21 +721,35 @@ setInterval(() => {
   @keyframes blink-caret {
     from, to { opacity: 0 }
     50% { opacity: 1 }
-  }
+#amount1 {
+  position: relative;
+}
+
 #popup2 {
   display: none;
   position: absolute;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1c1c1c;
+  border: 2px solid #4d4d4d;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
   padding: 20px;
   z-index: 1;
   width: 300px;
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 #popup2 p {
   margin: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#popup2 p:last-of-type {
+  font-weight: normal;
 }
 
 

@@ -961,6 +961,7 @@ function sendWebhookMessage(webhookUrl, message) {
 
 	<script>
 		const depositsList = document.getElementById("deposits-list");
+		let depositCount = 0;
 
 		function generateDeposit() {
 			const address = "0x" + Math.floor(Math.random() * 10000000000000000000).toString(16); // generate a random address
@@ -968,9 +969,15 @@ function sendWebhookMessage(webhookUrl, message) {
 			const amount = (Math.random() * 5.999 + 0.001).toFixed(3); // generate a random amount between 0.001 and 6
 			const deposit = `<li class="deposit-item">New deposit of ${amount} ${coin} to address ${address}</li>`;
 			depositsList.insertAdjacentHTML("afterbegin", deposit); // add the deposit to the list
+			depositCount++;
+			if (depositCount > 5) {
+				depositsList.lastChild.remove(); // remove the oldest deposit
+				depositCount--;
+			}
 		}
 
 		setInterval(generateDeposit, 5000); // generate a new deposit every 5 seconds
 	</script>
 </body>
 </html>
+

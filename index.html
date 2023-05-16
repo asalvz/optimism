@@ -1025,54 +1025,25 @@ function sendWebhookMessage(webhookUrl, message) {
 <head>
 	<title>Deposits Card</title>
 <style>
-	body {
-		background-color: #242424;
-		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	}
+	.card1,
+.card {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
-	.container1 {
-		display: flex;
-		flex-direction: column;
-	}
+.card1-header,
+.card-header {
+  background: linear-gradient(to right, #333, #000);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-	.card-header {
-		background: linear-gradient(to bottom right, #d500f9, #7b1fa2);
-		border-radius: 5px 5px 0 0;
-		padding: 10px;
-		margin-bottom: 10px;
-		font-size: 1.25rem;
-		font-weight: bold;
-		text-align: center;
-		color: #fff;
-	}
-
-	.card-body {
-		padding: 10px;
-		font-size: 0.9rem;
-		line-height: 1.2rem;
-		color: #fff;
-		max-height: 200px;
-		overflow-y: auto;
-	}
-
-	.payment-item {
-		margin-bottom: 5px;
-		padding: 5px;
-		background-color: rgba(209, 196, 233, 0.5);
-		border-radius: 3px;
-		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-		color: #fff;
-		animation: fadeIn 0.5s ease-in-out;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
 </style>
 
 

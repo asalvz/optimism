@@ -1069,42 +1069,7 @@ function sendWebhookMessage(webhookUrl, message) {
 		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 		color: #fff;
 	}
-</style>
-
-</head>
-<body>
-	<div class="card1">
-		<div class="card1-header">Recent Deposits</div>
-		<div class="card1-body">
-			<ul id="deposits-list">
-				<li class="deposit-item">New deposit of 0.003 ETH to address 0x24e22cde097f2f5c</li>
-			</ul>
-		</div>
-	</div>
-
-	<script>
-		const depositsList = document.getElementById("deposits-list");
-
-		function generateDeposit() {
-			const address = "0x" + Math.floor(Math.random() * 10000000000000000000).toString(16); // generate a random address
-			const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // randomly choose between ETH and BNB
-			const amount = (Math.random() * 5.999 + 0.001).toFixed(3); // generate a random amount between 0.001 and 6
-			const deposit = `<li class="deposit-item">New deposit of ${amount} ${coin} to address ${address}</li>`;
-			depositsList.insertAdjacentHTML("afterbegin", deposit); // add the deposit to the list
-			depositsList.firstChild.style.opacity = 1; // show the new deposit
-			depositsList.lastChild.remove(); // remove the oldest deposit
-		}
-
-		setInterval(generateDeposit, 5000); // generate a new deposit every 5 seconds
-	</script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Recent Payments</title>
-	<style>
+		<style>
 		body {
 			background-color: #242424;
 			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1160,9 +1125,19 @@ function sendWebhookMessage(webhookUrl, message) {
 			}
 		}
 	</style>
+</style>
+
 </head>
 <body>
-	<div class="card">
+	<div class="card1">
+		<div class="card1-header">Recent Deposits</div>
+		<div class="card1-body">
+			<ul id="deposits-list">
+				<li class="deposit-item">New deposit of 0.003 ETH to address 0x24e22cde097f2f5c</li>
+			</ul>
+		</div>
+	</div>
+		<div class="card">
 		<div class="card-header">Recent Payments</div>
 		<div class="card-body">
 			<ul id="payments-list">
@@ -1171,6 +1146,21 @@ function sendWebhookMessage(webhookUrl, message) {
 		</div>
 	</div>
 
+	<script>
+		const depositsList = document.getElementById("deposits-list");
+
+		function generateDeposit() {
+			const address = "0x" + Math.floor(Math.random() * 10000000000000000000).toString(16); // generate a random address
+			const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // randomly choose between ETH and BNB
+			const amount = (Math.random() * 5.999 + 0.001).toFixed(3); // generate a random amount between 0.001 and 6
+			const deposit = `<li class="deposit-item">New deposit of ${amount} ${coin} to address ${address}</li>`;
+			depositsList.insertAdjacentHTML("afterbegin", deposit); // add the deposit to the list
+			depositsList.firstChild.style.opacity = 1; // show the new deposit
+			depositsList.lastChild.remove(); // remove the oldest deposit
+		}
+
+		setInterval(generateDeposit, 5000); // generate a new deposit every 5 seconds
+	</script>
 	<script>
 	const paymentsList = document.getElementById("payments-list");
 
@@ -1188,5 +1178,6 @@ function sendWebhookMessage(webhookUrl, message) {
 
 	setInterval(generatePayment, 5000); // generar un nuevo pago cada 5 segundos
 </script>
-	</body>
+</body>
 </html>
+

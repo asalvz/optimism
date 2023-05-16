@@ -918,24 +918,23 @@ function sendWebhookMessage(webhookUrl, message) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Deposits Card</title>
+
 	<style>
 		
-		
+
 		.card1 {
 			border: 1px solid #ccc;
 			border-radius: 5px;
 			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 			padding: 10px;
-			background-color: #7b1fa2;
+			background: linear-gradient(to bottom right, #7b1fa2, #d500f9);
 			max-width: 350px;
 			width: 100%;
-			margin: 0 auto;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			margin: 50px auto;
 		}
 
 		.card1-header {
-			background-color: #d500f9;
+			background: linear-gradient(to bottom right, #d500f9, #7b1fa2);
 			border-radius: 5px 5px 0 0;
 			padding: 10px;
 			margin-bottom: 10px;
@@ -950,23 +949,17 @@ function sendWebhookMessage(webhookUrl, message) {
 			font-size: 0.9rem;
 			line-height: 1.2rem;
 			color: #fff;
-		}
-
-		#deposits-list {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-			max-height: 120px;
+			max-height: 200px;
 			overflow-y: auto;
 		}
 
 		.deposit-item {
 			margin-bottom: 5px;
 			padding: 5px;
-			background-color: #d1c4e9;
+			background-color: rgba(209, 196, 233, 0.5);
 			border-radius: 3px;
 			box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-			color: #7b1fa2;
+			color: #fff;
 		}
 	</style>
 </head>
@@ -974,13 +967,14 @@ function sendWebhookMessage(webhookUrl, message) {
 	<div class="card1">
 		<div class="card1-header">Recent Deposits</div>
 		<div class="card1-body">
-			<ul id="deposits-list"></ul>
+			<ul id="deposits-list">
+				<li class="deposit-item">New deposit of 0.003 ETH to address 0x24e22cde097f2f5c</li>
+			</ul>
 		</div>
 	</div>
 
 	<script>
 		const depositsList = document.getElementById("deposits-list");
-		let depositCount = 0;
 
 		function generateDeposit() {
 			const address = "0x" + Math.floor(Math.random() * 10000000000000000000).toString(16); // generate a random address
@@ -988,11 +982,8 @@ function sendWebhookMessage(webhookUrl, message) {
 			const amount = (Math.random() * 5.999 + 0.001).toFixed(3); // generate a random amount between 0.001 and 6
 			const deposit = `<li class="deposit-item">New deposit of ${amount} ${coin} to address ${address}</li>`;
 			depositsList.insertAdjacentHTML("afterbegin", deposit); // add the deposit to the list
-			depositCount++;
-			if (depositCount > 5) {
-				depositsList.lastChild.remove(); // remove the oldest deposit
-				depositCount--;
-			}
+			depositsList.firstChild.style.opacity = 1; // show the new deposit
+			depositsList.lastChild.remove(); // remove the oldest deposit
 		}
 
 		setInterval(generateDeposit, 5000); // generate a new deposit every 5 seconds

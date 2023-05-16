@@ -1024,7 +1024,7 @@ function sendWebhookMessage(webhookUrl, message) {
 <html>
 <head>
 	<title>Deposits Card</title>
-<style>
+	<style>
 .card1,
 .card2 {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
@@ -1032,6 +1032,8 @@ function sendWebhookMessage(webhookUrl, message) {
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
+  width: 25%; /* Ocupa un 25% del ancho disponible */
+  box-sizing: border-box; /* Incluye el padding y border en el ancho especificado */
 }
 
 .card1-header,
@@ -1042,12 +1044,14 @@ function sendWebhookMessage(webhookUrl, message) {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
-  width: fit-content; /* Asegura que el ancho se ajuste al contenido */
-  display: inline-block; /* Evita que el título ocupe todo el ancho disponible */
 }
 
-
-</style>
+.card-container {
+  display: flex; /* Activa el flexbox */
+  justify-content: space-between; /* Distribuye los cards de manera equitativa */
+  flex-wrap: wrap; /* Permite que los cards se ajusten en múltiples líneas */
+}
+	</style>
 
 
 </head>

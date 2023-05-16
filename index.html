@@ -1025,7 +1025,7 @@ function sendWebhookMessage(webhookUrl, message) {
 <head>
 	<title>Deposits Card</title>
 <style>
-	.card1,
+.card1,
 .card {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
   color: #fff;
@@ -1042,7 +1042,10 @@ function sendWebhookMessage(webhookUrl, message) {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  width: fit-content; /* Asegura que el ancho se ajuste al contenido */
+  display: inline-block; /* Evita que el título ocupe todo el ancho disponible */
 }
+
 
 </style>
 

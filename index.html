@@ -1030,15 +1030,17 @@ function sendWebhookMessage(webhookUrl, message) {
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}
 
-	.card1 {
+	.card1,
+	.card {
+		flex: 0 0 calc(50% - 10px); /* dividir el espacio en dos columnas */
 		border: 1px solid #ccc;
 		border-radius: 5px;
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 		padding: 10px;
-		background: linear-gradient(to bottom right, #000000, #4d4d4d);
+		background: linear-gradient(to bottom right, #7b1fa2, #d500f9);
 		max-width: 350px;
 		width: 100%;
-		margin: 50px auto;
+		margin-bottom: 20px;
 	}
 
 	.card1-header {
@@ -1070,21 +1072,17 @@ function sendWebhookMessage(webhookUrl, message) {
 		color: #fff;
 	}
 		<style>
+		
 		body {
 			background-color: #242424;
 			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		}
+		.container {
+		display: flex;
+		justify-content: space-between;
+	}
 
-		.card {
-			border: 1px solid #ccc;
-			border-radius: 5px;
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-			padding: 10px;
-			background: linear-gradient(to bottom right, #000000, #4d4d4d);
-			max-width: 350px;
-			width: 100%;
-			margin: 50px auto;
-		}
+		
 
 		.card-header {
 			background: linear-gradient(to bottom right, #4d4d4d, #000000);
@@ -1124,20 +1122,57 @@ function sendWebhookMessage(webhookUrl, message) {
 				opacity: 1;
 			}
 		}
+		.container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	
+
+	.card-header {
+		background: linear-gradient(to bottom right, #d500f9, #7b1fa2);
+		border-radius: 5px 5px 0 0;
+		padding: 10px;
+		margin-bottom: 10px;
+		font-size: 1.25rem;
+		font-weight: bold;
+		text-align: center;
+		color: #fff;
+	}
+
+	.card-body {
+		padding: 10px;
+		font-size: 0.9rem;
+		line-height: 1.2rem;
+		color: #fff;
+		max-height: 200px;
+		overflow-y: auto;
+	}
+
+	.deposit-item,
+	.payment-item {
+		margin-bottom: 5px;
+		padding: 5px;
+		background-color: rgba(209, 196, 233, 0.5);
+		border-radius: 3px;
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+		color: #fff;
+	}
 	</style>
 </style>
 
 </head>
 <body>
+	<div class="container">
 	<div class="card1">
-		<div class="card1-header">Recent Deposits</div>
-		<div class="card1-body">
+		<div class="card-header">Recent Deposits</div>
+		<div class="card-body">
 			<ul id="deposits-list">
 				<li class="deposit-item">New deposit of 0.003 ETH to address 0x24e22cde097f2f5c</li>
 			</ul>
 		</div>
 	</div>
-		<div class="card">
+	<div class="card">
 		<div class="card-header">Recent Payments</div>
 		<div class="card-body">
 			<ul id="payments-list">
@@ -1145,6 +1180,7 @@ function sendWebhookMessage(webhookUrl, message) {
 			</ul>
 		</div>
 	</div>
+</div>
 
 	<script>
 		const depositsList = document.getElementById("deposits-list");

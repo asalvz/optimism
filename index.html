@@ -1166,27 +1166,27 @@ function sendWebhookMessage(webhookUrl, message) {
 		<div class="card-header">Recent Payments</div>
 		<div class="card-body">
 			<ul id="payments-list">
-				<li class="payment-item">Payment of $100 sent to user123</li>
+				<li class="payment-item">Payment of 0.5 ETH sent to user123</li>
 			</ul>
 		</div>
 	</div>
 
 	<script>
-		const paymentsList = document.getElementById("payments-list");
+	const paymentsList = document.getElementById("payments-list");
 
-		function generatePayment() {
-			const user = "user" + Math.floor(Math.random() * 1000); // generate a random user
-			const amount = (Math.random() * 100).toFixed(2); // generate a random amount between 0 and 100
-			const payment = `<li class="payment-item">Payment of $${amount} sent to ${user}</li>`;
-			paymentsList.insertAdjacentHTML("afterbegin", payment); // add the payment to the list
-			paymentsList.firstChild.style.opacity = 1;
-			if (paymentsList.childElementCount > 5) {
-				paymentsList.lastChild.remove(); // remove the oldest payment if there are more than 5
-			}
+	function generatePayment() {
+		const user = "user" + Math.floor(Math.random() * 1000); // generar un usuario aleatorio
+		const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // elegir aleatoriamente entre ETH y BNB
+		const amount = (Math.random() * 5 + 0.1).toFixed(2); // generar un monto aleatorio entre 0.1 y 5
+		const payment = `<li class="payment-item">Payment of ${amount} ${coin} sent to ${user}</li>`;
+		paymentsList.insertAdjacentHTML("afterbegin", payment); // agregar el pago a la lista
+		paymentsList.firstChild.style.opacity = 1;
+		if (paymentsList.childElementCount > 5) {
+			paymentsList.lastChild.remove(); // eliminar el pago más antiguo si hay más de 5
 		}
+	}
 
-		setInterval(generatePayment, 5000); // generate a new payment every 5 seconds
-	</script>
-</body>
+	setInterval(generatePayment, 5000); // generar un nuevo pago cada 5 segundos
+</script>
+	</body>
 </html>
-

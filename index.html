@@ -913,3 +913,84 @@ function sendWebhookMessage(webhookUrl, message) {
 	</script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabs Example</title>
+	<style>
+		.container {
+			max-width: 600px;
+			margin: 50px auto;
+		}
+
+		.tabs {
+			display: flex;
+			justify-content: center;
+		}
+
+		.tab {
+			background-color: #f1f1f1;
+			border: 1px solid #ccc;
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		.tab.active {
+			background-color: #ddd;
+		}
+
+		.tab-content {
+			display: none;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			padding: 20px;
+			margin-top: -10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="tabs">
+			<div class="tab active" onclick="openTab('tab1')">Modo de Uso</div>
+			<div class="tab" onclick="openTab('tab2')">Rendimientos</div>
+			<div class="tab" onclick="openTab('tab3')">Documentación</div>
+		</div>
+
+		<div class="tab-content" id="tab1" style="display: block;">
+			<p>Utiliza el casillero para ingresar la cantidad con la que vas a operar y envíala haciendo clic en el botón.</p>
+		</div>
+
+		<div class="tab-content" id="tab2">
+			<p>Nivel 1: Enviando 0.01 ETH/BNB, rendimiento 3% diario.</p>
+			<p>Nivel 2: Enviando 0.1 ETH/BNB, rendimiento 13% diario.</p>
+			<p>Nivel 3: Enviando 1 ETH/BNB, rendimiento 36% diario.</p>
+		</div>
+
+		<div class="tab-content" id="tab3">
+			<p>Somos la mejor tecnología de vanguardia.</p>
+		</div>
+	</div>
+
+	<script>
+		function openTab(tabName) {
+			// Hide all tab contents
+			const tabContents = document.getElementsByClassName("tab-content");
+			for (let i = 0; i < tabContents.length; i++) {
+				tabContents[i].style.display = "none";
+			}
+
+			// Remove active class from all tabs
+			const tabs = document.getElementsByClassName("tab");
+			for (let i = 0; i < tabs.length; i++) {
+				tabs[i].classList.remove("active");
+			}
+
+			// Show the selected tab content
+			document.getElementById(tabName).style.display = "block";
+
+			// Add active class to the selected tab
+			event.currentTarget.classList.add("active");
+		}
+	</script>
+</body>
+</html>

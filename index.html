@@ -929,22 +929,40 @@ function sendWebhookMessage(webhookUrl, message) {
 		}
 
 		.tab {
-			background-color: #f1f1f1;
-			border: 1px solid #ccc;
+			background: linear-gradient(to bottom, #000000, #4d4d4d);
+			border: 1px solid #333;
+			border-radius: 5px 5px 0 0;
 			padding: 10px 20px;
 			cursor: pointer;
+			color: #fff;
+			transition: background 0.3s ease-in-out;
+		}
+
+		.tab:hover {
+			background: linear-gradient(to bottom, #222222, #3d3d3d);
 		}
 
 		.tab.active {
-			background-color: #ddd;
+			background: linear-gradient(to bottom, #444444, #666666);
 		}
 
 		.tab-content {
 			display: none;
 			background-color: #fff;
 			border: 1px solid #ccc;
+			border-top: none;
 			padding: 20px;
 			margin-top: -10px;
+			animation: fadeIn 0.5s ease-in-out;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
 		}
 	</style>
 </head>
@@ -972,25 +990,30 @@ function sendWebhookMessage(webhookUrl, message) {
 	</div>
 
 	<script>
-		function openTab(tabName) {
+	let activeTab = '';
+
+	function openTab(tabName) {
+		const tabContents = document.getElementsByClassName("tab-content");
+
+		if (activeTab === tabName) {
+			// Close the active tab if it's clicked again
+			document.getElementById(tabName).style.display = "none";
+			document.getElementsByClassName("tab active")[0].classList.remove("active");
+			activeTab = '';
+		} else {
 			// Hide all tab contents
-			const tabContents = document.getElementsByClassName("tab-content");
 			for (let i = 0; i < tabContents.length; i++) {
 				tabContents[i].style.display = "none";
 			}
 
-			// Remove active class from all tabs
-			const tabs = document.getElementsByClassName("tab");
-			for (let i = 0; i < tabs.length; i++) {
-				tabs[i].classList.remove("active");
-			}
-
 			// Show the selected tab content
 			document.getElementById(tabName).style.display = "block";
+			document.getElementsByClassName("tab active")[0].classList.remove("active");
+			document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add("active");
 
-			// Add active class to the selected tab
-			event.currentTarget.classList.add("active");
+			activeTab = tabName;
 		}
-	</script>
+	}
+</script>
 </body>
 </html>

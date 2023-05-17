@@ -977,108 +977,14 @@ function sendWebhookMessage(webhookUrl, message) {
   justify-content: space-between; /* Distribuye los cards de manera equitativa */
   flex-wrap: wrap; /* Permite que los cards se ajusten en múltiples líneas */
 }
-	</style>
-
-
-</head>
-<body>
-	<div class="container1">
-	<div class="card1">
-		<div class="card2-header">Recent Deposits</div>
-		<div class="card2-body">
-			<ul id="deposits-list">
-				<li class="deposit-item">New deposit of 0.003 ETH to address 0x24e22cde097f2f5c</li>
-			</ul>
-		</div>
-	</div>
-	<div class="card2">
-		<div class="card2-header">Recent Payments</div>
-		<div class="card2-body">
-			<ul id="payments-list">
-				<li class="payment-item">Payment of 0.5 ETH sent to user123</li>
-			</ul>
-		</div>
-	</div>
-</div>
-	
-	<footer>
-<div class="container3" style="background-color: rgba(0, 0, 0, 0.7); color: #fff;">
-
-
-    <div class="footer-container">
-      <ul class="footer-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="https://smartfunds-ai.netlify.app/faq">FAQ</a></li>
-        <li><a href="https://t.me/SmartFundsAI">Support</a></li>
-        <li><a href="https://smartfunds-ai.netlify.app/terms">Terms &amp; Conditions</a></li>
-        <li><a href="/privacy">Privacy Policy</a></li>
-      </ul>
-      <div class="footer-contact">
-        <p>Contact us: <a href="smartfundsai@smartfunds.com">smartfundsai@smartfunds.com</a></p>
-        <p>Follow us:
-          <a href="https://www.facebook.com/profile.php?id=100092525930263&mibextid=ZbWKwL" target="_blank">Facebook</a>
-          <a href="https://t.me/SmartFundsAI" target="_blank">Telegram</a>
-          <a href="https://www.instagram.com/example" target="_blank">Instagram</a>
-        </p>
-      </div>
-    </div>
-    <p class="footer-copyright">
-      &copy; 2023 Your Website | All rights reserved
-    </p>
-  </div>
-</footer>
-
-
-
-	<script>
-		const depositsList = document.getElementById("deposits-list");
-
-		function generateDeposit() {
-			const address = "0x" + Math.floor(Math.random() * 10000000000000000000).toString(16); // generate a random address
-			const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // randomly choose between ETH and BNB
-			const amount = (Math.random() * 5.999 + 0.001).toFixed(3); // generate a random amount between 0.001 and 6
-			const deposit = `<li class="deposit-item">New deposit of ${amount} ${coin} to address ${address}</li>`;
-			depositsList.insertAdjacentHTML("afterbegin", deposit); // add the deposit to the list
-			depositsList.firstChild.style.opacity = 1; // show the new deposit
-			depositsList.lastChild.remove(); // remove the oldest deposit
-		}
-
-		setInterval(generateDeposit, 5000); // generate a new deposit every 5 seconds
-	</script>
-	<script>
-	const paymentsList = document.getElementById("payments-list");
-
-	function generatePayment() {
-		const user = "user" + Math.floor(Math.random() * 1000); // generar un usuario aleatorio
-		const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // elegir aleatoriamente entre ETH y BNB
-		const amount = (Math.random() * 5 + 0.1).toFixed(2); // generar un monto aleatorio entre 0.1 y 5
-		const payment = `<li class="payment-item">Payment of ${amount} ${coin} sent to ${user}</li>`;
-		paymentsList.insertAdjacentHTML("afterbegin", payment); // agregar el pago a la lista
-		paymentsList.firstChild.style.opacity = 1;
-		if (paymentsList.childElementCount > 5) {
-			paymentsList.lastChild.remove(); // eliminar el pago más antiguo si hay más de 5
-		}
-	}
-
-	setInterval(generatePayment, 5000); // generar un nuevo pago cada 5 segundos
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-  body {
-  font-family: Arial, sans-serif;
-}
-
-.cardss {
+		.cardss {
   background: linear-gradient(180deg, #8a65a8, #4d3881);
   color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 300px;
+  float: right;
 }
 
 h2 {
@@ -1156,10 +1062,33 @@ h2 {
   width: 80%; /* Ejemplo de barras ficticias de depósito */
 }
 
-  </style>
+	</style>
+
+
 </head>
 <body>
- <div class="cardss">
+	<div class="container1">
+	<div class="card1">
+		<div class="card2-header">Recent Deposits</div>
+		<div class="card2-body">
+			<ul id="deposits-list">
+				<li class="deposit-item">New deposit of 0.003 ETH to address 0x24e22cde097f2f5c</li>
+			</ul>
+		</div>
+	</div>
+	<div class="card2">
+		<div class="card2-header">Recent Payments</div>
+		<div class="card2-body">
+			<ul id="payments-list">
+				<li class="payment-item">Payment of 0.5 ETH sent to user123</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	
+	<footer>
+		
+		 <div class="cardss">
   <h2>Liquidez</h2>
   <div class="liquidity-value">
     <span class="currency-symbol">$</span>
@@ -1179,7 +1108,67 @@ h2 {
     <div class="deposit-bar bnb"></div>
   </div>
 </div>
-<script>
+<div class="container3" style="background-color: rgba(0, 0, 0, 0.7); color: #fff;">
+
+
+    <div class="footer-container">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="https://smartfunds-ai.netlify.app/faq">FAQ</a></li>
+        <li><a href="https://t.me/SmartFundsAI">Support</a></li>
+        <li><a href="https://smartfunds-ai.netlify.app/terms">Terms &amp; Conditions</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+      </ul>
+      <div class="footer-contact">
+        <p>Contact us: <a href="smartfundsai@smartfunds.com">smartfundsai@smartfunds.com</a></p>
+        <p>Follow us:
+          <a href="https://www.facebook.com/profile.php?id=100092525930263&mibextid=ZbWKwL" target="_blank">Facebook</a>
+          <a href="https://t.me/SmartFundsAI" target="_blank">Telegram</a>
+          <a href="https://www.instagram.com/example" target="_blank">Instagram</a>
+        </p>
+      </div>
+    </div>
+    <p class="footer-copyright">
+      &copy; 2023 Your Website | All rights reserved
+    </p>
+  </div>
+</footer>
+
+
+
+	<script>
+		const depositsList = document.getElementById("deposits-list");
+
+		function generateDeposit() {
+			const address = "0x" + Math.floor(Math.random() * 10000000000000000000).toString(16); // generate a random address
+			const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // randomly choose between ETH and BNB
+			const amount = (Math.random() * 5.999 + 0.001).toFixed(3); // generate a random amount between 0.001 and 6
+			const deposit = `<li class="deposit-item">New deposit of ${amount} ${coin} to address ${address}</li>`;
+			depositsList.insertAdjacentHTML("afterbegin", deposit); // add the deposit to the list
+			depositsList.firstChild.style.opacity = 1; // show the new deposit
+			depositsList.lastChild.remove(); // remove the oldest deposit
+		}
+
+		setInterval(generateDeposit, 5000); // generate a new deposit every 5 seconds
+	</script>
+	<script>
+	const paymentsList = document.getElementById("payments-list");
+
+	function generatePayment() {
+		const user = "user" + Math.floor(Math.random() * 1000); // generar un usuario aleatorio
+		const coin = Math.random() < 0.5 ? "ETH" : "BNB"; // elegir aleatoriamente entre ETH y BNB
+		const amount = (Math.random() * 5 + 0.1).toFixed(2); // generar un monto aleatorio entre 0.1 y 5
+		const payment = `<li class="payment-item">Payment of ${amount} ${coin} sent to ${user}</li>`;
+		paymentsList.insertAdjacentHTML("afterbegin", payment); // agregar el pago a la lista
+		paymentsList.firstChild.style.opacity = 1;
+		if (paymentsList.childElementCount > 5) {
+			paymentsList.lastChild.remove(); // eliminar el pago más antiguo si hay más de 5
+		}
+	}
+
+	setInterval(generatePayment, 5000); // generar un nuevo pago cada 5 segundos
+</script>
+	<script>
   // Variables globales
   var liquidityValue = 82000; // Valor inicial de liquidez en USD
   var percentageChange = 0; // Cambio de porcentaje inicial
@@ -1233,8 +1222,5 @@ h2 {
     updateCard();
   }, 3000); // Cambio de valor cada 3 segundos (3000 ms)
 </script>
-
-	</body>
+</body>
 </html>
-
-

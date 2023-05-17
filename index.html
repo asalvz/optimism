@@ -753,32 +753,33 @@ function sendWebhookMessage(webhookUrl, message) {
 <head>
 	<style type="text/css">
 		.popup {
-			position: absolute;
-			top: 20px;
-			left: 20px;
-			background: linear-gradient(135deg, #00FFFF 0%, #FF00FF 100%);
-			color: white;
-			padding: 15px;
-			border-radius: 15px;
-			box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-			opacity: 0;
-			transition: opacity 0.3s ease-out;
-			transform: translateY(-50px) scale(0.8);
-			z-index: 999;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			font-family: 'Helvetica', sans-serif;
-			font-size: 13px;
-			line-height: 1.5;
-			width: 250px;
-			height: 200px;
-			border: none;
-			outline: none;
-			font-weight: bold;
-		}
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #00FFFF 0%, #FF00FF 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    transform: translateY(-50px) scale(0.8);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    width: 250px;
+    height: 200px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+
 
 		.popup.active {
 			opacity: 1;

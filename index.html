@@ -1068,7 +1068,7 @@ function sendWebhookMessage(webhookUrl, message) {
 <html>
 <head>
   <style>
-    body {
+   body {
       font-family: Arial, sans-serif;
     }
 
@@ -1184,19 +1184,36 @@ function sendWebhookMessage(webhookUrl, message) {
     <div class="deposit-bar bnb"></div>
   </div>
 </div>
+<script>
+  // Variables globales
+  var liquidityValue = 82000; // Valor inicial de liquidez en USD
+  var percentageChange = 0; // Cambio de porcentaje inicial
 
-	<script>
-  // Simulación de cambio de valor en tiempo real
-  setInterval(function() {
+  // Función para actualizar el valor de liquidez y el cambio de porcentaje
+  function updateLiquidityValue() {
     // Generar un número aleatorio para simular el cambio de valor
-    var randomValue = Math.random() * 100000 + 82000; // Valor aleatorio entre 82,000 y 182,000
+    var randomChange = Math.random() * 20 - 10; // Cambio aleatorio entre -10 y 10
+    var newValue = liquidityValue + randomChange;
+
+    // Limitar el cambio máximo y mínimo
+    if (newValue < 82000) {
+      newValue = 82000;
+    } else if (newValue > 182000) {
+      newValue = 182000;
+    }
 
     // Actualizar el valor de liquidez
-    document.querySelector('.liquidity-amount').textContent = randomValue.toFixed(2);
+    liquidityValue = newValue;
 
     // Calcular el cambio de porcentaje
-    var previousValue = parseFloat(document.querySelector('.liquidity-amount').textContent.replace(',', ''));
-    var percentageChange = ((randomValue - previousValue) / previousValue) * 100;
+    var previousValue = liquidityValue - randomChange;
+    percentageChange = ((liquidityValue - previousValue) / previousValue) * 100;
+  }
+
+  // Función para actualizar la tarjeta y animar los gráficos
+  function updateCard() {
+    // Actualizar el valor de liquidez en USD
+    document.querySelector('.liquidity-amount').textContent = liquidityValue.toFixed(2);
 
     // Actualizar el cambio de porcentaje y aplicar el color correspondiente
     var percentageChangeElement = document.querySelector('.percentage-change');
@@ -1213,8 +1230,15 @@ function sendWebhookMessage(webhookUrl, message) {
     var redAccumulationElement = document.querySelector('.accumulation.red');
     greenAccumulationElement.style.width = (greenAccumulationElement.offsetWidth + Math.abs(percentageChange) * 0.1) + 'px';
     redAccumulationElement.style.width = (redAccumulationElement.offsetWidth + Math.abs(percentageChange) * 0.1) + 'px';
+  }
+
+  // Función para simular el cambio de valor en tiempo real
+  setInterval(function() {
+    updateLiquidityValue();
+    updateCard();
   }, 3000); // Cambio de valor cada 3 segundos (3000 ms)
 </script>
+
 	</body>
 </html>
 

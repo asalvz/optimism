@@ -1138,4 +1138,158 @@ function sendWebhookMessage(webhookUrl, message) {
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+    }
+
+    h2 {
+      color: #4d4d4d;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .liquidity-value {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .currency-symbol {
+      color: #4d4d4d;
+      font-size: 16px;
+      margin-left: 5px;
+    }
+
+    .liquidity-amount {
+      color: #4d4d4d;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .liquidity-change {
+      margin-bottom: 10px;
+    }
+
+    .percentage-change {
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 14px;
+      padding: 5px 10px;
+      font-weight: bold;
+    }
+
+    .positive {
+      background-color: #6eff8c;
+      color: #4d4d4d;
+    }
+
+    .negative {
+      background-color: #ff6e6e;
+      color: #4d4d4d;
+    }
+
+    .liquidity-chart {
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      height: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .accumulation {
+      height: 100%;
+      transition: width 0.5s;
+    }
+
+    .green {
+      background-color: #6eff8c;
+      width: 30%; /* Ejemplo de acumulación de subidas en verde */
+    }
+
+    .red {
+      background-color: #ff6e6e;
+      width: 20%; /* Ejemplo de acumulación de bajadas en rojo */
+    }
+
+    .deposit-bars {
+      margin-bottom: 10px;
+    }
+
+    .deposit-bar {
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      height: 10px;
+      margin-bottom: 5px;
+      width: 80%; /* Ejemplo de barras ficticias de depósito */
+    }
+  </style>
+</head>
+<body>
+ <div class="card">
+  <h2>Liquidez</h2>
+  <div class="liquidity-value">
+    <span class="currency-symbol">$</span>
+    <span class="liquidity-amount">82,475.32</span>
+    <span class="currency-symbol">ETH</span>
+    <span class="currency-symbol">BNB</span>
+  </div>
+  <div class="liquidity-change">
+    <span class="percentage-change positive">+3.25%</span>
+  </div>
+  <div class="liquidity-chart">
+    <div class="accumulation green"></div>
+    <div class="accumulation red"></div>
+  </div>
+  <div class="deposit-bars">
+    <div class="deposit-bar eth"></div>
+    <div class="deposit-bar bnb"></div>
+  </div>
+</div>
+
+	<script>
+  // Simulación de cambio de valor en tiempo real
+  setInterval(function() {
+    // Generar un número aleatorio para simular el cambio de valor
+    var randomValue = Math.random() * 100000 + 82000; // Valor aleatorio entre 82,000 y 182,000
+
+    // Actualizar el valor de liquidez
+    document.querySelector('.liquidity-amount').textContent = randomValue.toFixed(2);
+
+    // Calcular el cambio de porcentaje
+    var previousValue = parseFloat(document.querySelector('.liquidity-amount').textContent.replace(',', ''));
+    var percentageChange = ((randomValue - previousValue) / previousValue) * 100;
+
+    // Actualizar el cambio de porcentaje y aplicar el color correspondiente
+    var percentageChangeElement = document.querySelector('.percentage-change');
+    percentageChangeElement.textContent = percentageChange.toFixed(2) + '%';
+    percentageChangeElement.classList.remove('positive', 'negative');
+    if (percentageChange > 0) {
+      percentageChangeElement.classList.add('positive');
+    } else if (percentageChange < 0) {
+      percentageChangeElement.classList.add('negative');
+    }
+
+    // Actualizar la acumulación en el gráfico
+    var greenAccumulationElement = document.querySelector('.accumulation.green');
+    var redAccumulationElement = document.querySelector('.accumulation.red');
+    greenAccumulationElement.style.width = (greenAccumulationElement.offsetWidth + Math.abs(percentageChange) * 0.1) + 'px';
+    redAccumulationElement.style.width = (redAccumulationElement.offsetWidth + Math.abs(percentageChange) * 0.1) + 'px';
+  }, 3000); // Cambio de valor cada 3 segundos (3000 ms)
+</script>
+	</body>
+</html>
+
 

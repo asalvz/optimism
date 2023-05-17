@@ -1068,99 +1068,94 @@ function sendWebhookMessage(webhookUrl, message) {
 <html>
 <head>
   <style>
-   body {
-      font-family: Arial, sans-serif;
-    }
+  body {
+  font-family: Arial, sans-serif;
+}
 
-    .cardss {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      width: 300px;
-    }
+.cardss {
+  background: linear-gradient(180deg, #8a65a8, #4d3881);
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+}
 
-    h2 {
-      color: #4d4d4d;
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-    .liquidity-value {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
+.liquidity-value {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
-    .currency-symbol {
-      color: #4d4d4d;
-      font-size: 16px;
-      margin-left: 5px;
-    }
+.currency-symbol {
+  font-size: 16px;
+  margin-left: 5px;
+}
 
-    .liquidity-amount {
-      color: #4d4d4d;
-      font-size: 24px;
-      font-weight: bold;
-    }
+.liquidity-amount {
+  font-size: 24px;
+  font-weight: bold;
+}
 
-    .liquidity-change {
-      margin-bottom: 10px;
-    }
+.liquidity-change {
+  margin-bottom: 10px;
+}
 
-    .percentage-change {
-      border-radius: 4px;
-      display: inline-block;
-      font-size: 14px;
-      padding: 5px 10px;
-      font-weight: bold;
-    }
+.percentage-change {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 14px;
+  padding: 5px 10px;
+  font-weight: bold;
+}
 
-    .positive {
-      background-color: #6eff8c;
-      color: #4d4d4d;
-    }
+.positive {
+  background-color: #6eff8c;
+}
 
-    .negative {
-      background-color: #ff6e6e;
-      color: #4d4d4d;
-    }
+.negative {
+  background-color: #ff6e6e;
+}
 
-    .liquidity-chart {
-      background-color: #f0f0f0;
-      border-radius: 4px;
-      height: 10px;
-      margin-bottom: 10px;
-      overflow: hidden;
-    }
+.liquidity-chart {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  height: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
 
-    .accumulation {
-      height: 100%;
-      transition: width 0.5s;
-    }
+.accumulation {
+  height: 100%;
+  transition: width 0.5s;
+}
 
-    .green {
-      background-color: #6eff8c;
-      width: 30%; /* Ejemplo de acumulación de subidas en verde */
-    }
+.green {
+  background-color: #6eff8c;
+}
 
-    .red {
-      background-color: #ff6e6e;
-      width: 20%; /* Ejemplo de acumulación de bajadas en rojo */
-    }
+.red {
+  background-color: #ff6e6e;
+}
 
-    .deposit-bars {
-      margin-bottom: 10px;
-    }
+.deposit-bars {
+  margin-bottom: 10px;
+}
 
-    .deposit-bar {
-      background-color: #f0f0f0;
-      border-radius: 4px;
-      height: 10px;
-      margin-bottom: 5px;
-      width: 80%; /* Ejemplo de barras ficticias de depósito */
-    }
+.deposit-bar {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  height: 10px;
+  margin-bottom: 5px;
+  width: 80%; /* Ejemplo de barras ficticias de depósito */
+}
+
   </style>
 </head>
 <body>

